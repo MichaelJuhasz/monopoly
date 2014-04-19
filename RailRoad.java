@@ -4,7 +4,7 @@ import java.awt.*;
 class RailRoad extends Property
 {
    public Player owner;
-   private String name;
+   public String name;
    private int price;
 
    public RailRoad(String n)

@@ -34,6 +34,7 @@ abstract class Property extends Tile
             {
                p.payment(price * -1);
                p.addAsset(price);
+               p.addDeed(this);
                owner = p;
                JOptionPane.showMessageDialog("Congratulations, you now own "+name, name+" purchased", JOptionPane.INFORMATION_MESSAGE);
             }
