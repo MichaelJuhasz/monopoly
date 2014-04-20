@@ -3,26 +3,27 @@ import java.awt.*;
 
 class Street extends Property
 {
-   private int rent, oneHs, twoHs, threeHs, fourHs, hotel, price, bldgCost, houses;
+   private int number, rent, oneHs, twoHs, threeHs, fourHs, hotel, price, bldgCost, houses;
    public Player owner;
    public String name;
    public Color color;
    private ArrayList<Street> group = new ArrayList<Street>();
    private boolean monopoly = false;
 
-   public Street(int r, int one, int two, int three, int four, 
+   public Street(int num, int r, int one, int two, int three, int four, 
    	               int htl, int p, int bldgC, String n, Color c, 
    	               Street g1, Street g2, Street g3)
    {
+   	  super(num, p, n);
       rent = r;
       oneHs = one;
       twoHs = two;
       threeHs = three;
       fourHs = four;
       hotel = htl;
-      price = p;
+      //price = p;
       bldgCost = bldgC;
-      name = n;
+      //name = n;
       color = c;
       group.add(g1);
       group.add(g2);

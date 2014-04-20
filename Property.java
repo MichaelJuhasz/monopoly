@@ -6,9 +6,11 @@ abstract class Property extends Tile
    private int price;
    public Player owner;
    private String name;
+   public int number;
 
-   public Property(int p, String n)
+   public Property(int num, int p, String n)
    {
+      number = num;
       price = p;
       name = n;
    }

@@ -9,11 +9,12 @@ class TaxTile extends Tile
    }
 
    private TaxType type;
-
    private String name; 
+   private int number;
 
-   public TaxTile(String n, TaxType tt)
+   public TaxTile(int num, String n, TaxType tt)
    {
+      number = num;
       name = n;
       type = tt;
    }

@@ -4,9 +4,11 @@ import java.awt.*;
 class Corner extends Tile
 {
    public String name;
+   public int number;
 
-   public Corner (String n)
+   public Corner (int num, String n)
    {
+   	  number = num;
       name = n;
    } 
 

@@ -7,10 +7,11 @@ class RailRoad extends Property
    public String name;
    private int price;
 
-   public RailRoad(String n)
+   public RailRoad(int num, String n)
    {
-      name = n;
-      price = 200;
+      super(num, 200, n);
+      //name = n;
+      //price = 200;
    }
 
    private void payRent()

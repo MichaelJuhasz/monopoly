@@ -7,10 +7,11 @@ class Utility extends Property
    public String name;
    private int price;
 
-   public Utility(String n)
+   public Utility(int num, String n)
    {
-      name = n;
-      price = 150;
+      super(num, 150, n);
+      //name = n;
+      //price = 150;
    }
 
    private void payRent(Player p)
