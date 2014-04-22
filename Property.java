@@ -40,7 +40,7 @@ abstract class Property extends Tile
             if (p.getFunds() < price) JOptionPane.showMessageDialog(null,"Not enough funds!","Not enough funds!", JOptionPane.ERROR_MESSAGE);
             else 
             {
-               p.payment(price * -1);
+               p.payment(-price);
                p.addAsset(price);
                p.addDeed(this);
                owner = p;
@@ -64,4 +64,5 @@ abstract class Property extends Tile
    private abstract void payRent(Player p);
 
    private abstract void updateGraphics();
+
 }
