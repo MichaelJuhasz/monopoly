@@ -23,7 +23,7 @@ class Player
    } 
 
    // This method will control the graphics (populating the sidebar with 
-   // apropriate buttons, connected to the correct player), and the actions
+   // appropriate buttons, connected to the correct player), and the actions
    // the player can take in his or her turn.
    public void beginTurn()
    {
