@@ -3,7 +3,6 @@ import java.awt.*;
 
 class Player
 {
-
    private boolean myTurn, canRoll, canUpgrade, canPayFine, inJail;
    private int doubles, rollResult, funds = 0; nonCashAssets = 0;
    public ArrayList<Property> deeds = new ArrayList<Property>();
@@ -15,7 +14,6 @@ class Player
    {
       name = n;
       token = icon;
-      // icon should be set somehow.
    } 
 
    // This method will control the graphics (populating the sidebar with 

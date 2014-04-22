@@ -7,7 +7,7 @@ class Go extends Corner
 
    public Go()
    {
-      super(1,"Go");
+      super(1,"GO");
       goPanel = new GoPanel(this);
    }
 
