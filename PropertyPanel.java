@@ -1,5 +1,8 @@
 import javax.swing.*;
+
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 class PropertyPanel extends JPanel
 {
@@ -40,7 +43,7 @@ class PropertyPanel extends JPanel
       // Draw border around tile
       g.setColor(Color.BLACK);
       g.setStroke(new BasicStroke(3));
-      g.drawRectangle(0,0,width,height);
+      g.drawRect(0,0,width,height);
 
       // Write name of tile
       g.drawString(name,width/2,height+20);
@@ -50,7 +53,7 @@ class PropertyPanel extends JPanel
       {
          for (int i = 0; i < guests.size(); i++)
          {
-            BufferedImage icon = guests.get(i).getIcon();
+            ImageIcon icon = guests.get(i).getIcon();
             g.drawImage(icon, (5 + (i * houseWidth)), height/2, null);
          }
       }

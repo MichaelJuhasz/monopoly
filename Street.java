@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 class Street extends Property
 {
@@ -39,7 +40,7 @@ class Street extends Property
 
    private void payRent(Player p)
    {
-   	  int toll;
+   	  int toll = 0;
       if (!monopoly) toll = rent;
       else
       {
@@ -73,13 +74,13 @@ class Street extends Property
       else if (group.size() ==3)
       {
          if (group.get(0).owner == group.get(1).owner &&
-         	 group.get(1).owner == group.get(2).owner) monopoly == true;
+         	 group.get(1).owner == group.get(2).owner) monopoly = true;
       } 
    }
 
    public void upgrade(Player p)
    {
-      if (houses >= 5) JOptionPane.showMessageDialog(name+" is already fully upgraded.", "Cannot Upgrade.", JOptionPane.ERROR_MESSAGE);
+      if (houses >= 5) JOptionPane.showMessageDialog(null, name+" is already fully upgraded.", "Cannot Upgrade.", JOptionPane.ERROR_MESSAGE);
       
       else 
       {
@@ -90,19 +91,19 @@ class Street extends Property
 	         	                      Math.abs(group.get(1).houses - group.get(2).houses) > 1 ||
 	         	                      Math.abs(group.get(0).houses - group.get(2).houses > 1)))
 	         {
-	            JOptionPane.showMessageDialog("Properties must be upgraded equally.", "Cannot Upgrade.", JOptionPane.ERROR_MESSAGE);
+	            JOptionPane.showMessageDialog(null, "Properties must be upgraded equally.", "Cannot Upgrade.", JOptionPane.ERROR_MESSAGE);
 	         }
-	         else if (p.getFunds >= bldgCost) 
+	         else if (p.getFunds() >= bldgCost) 
 	         {
-	            JOptionPane.showMessageDialog(name+" upgraded!", "Success!");
+	            JOptionPane.showMessageDialog(null, name+" upgraded!", "Success!", JOptionPane.INFORMATION_MESSAGE);
 	            houses++;
 	            p.payment(bldgCost * -1);   
 	         }
 
-	         else if (p.getFunds < bldgCost) JOptionPane.showMessageDialog(null,"Not enough funds!","Not enough funds!", JOptionPane.ERROR_MESSAGE);
+	         else if (p.getFunds() < bldgCost) JOptionPane.showMessageDialog(null,"Not enough funds!","Not enough funds!", JOptionPane.ERROR_MESSAGE);
 	      }
 
-	      else JOptionPane.showMessageDialog("You must own all properties of this color before any can be upgraded.", "Cannot Upgrade.", JOptionPane.ERROR_MESSAGE);
+	      else JOptionPane.showMessageDialog(null, "You must own all properties of this color before any can be upgraded.", "Cannot Upgrade.", JOptionPane.ERROR_MESSAGE);
       }
    }
 

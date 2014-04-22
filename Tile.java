@@ -1,3 +1,5 @@
+import javax.swing.JPanel;
+
 abstract class Tile 
 {
    public int number;

@@ -8,7 +8,7 @@ abstract class Property extends Tile
    public Player owner;
    public String name;
    public int number;
-   private ArrayList<Player> guests = new ArrayList<Player>();
+   public ArrayList<Player> guests = new ArrayList<Player>();
 
    public Property(int num, int p, String n)
    {
@@ -44,7 +44,7 @@ abstract class Property extends Tile
                p.addAsset(price);
                p.addDeed(this);
                owner = p;
-               JOptionPane.showMessageDialog("Congratulations, you now own "+name, name+" purchased", JOptionPane.INFORMATION_MESSAGE);
+               JOptionPane.showMessageDialog(null, "Congratulations, you now own "+name, name+" purchased", JOptionPane.INFORMATION_MESSAGE);
             }
          }
       }
