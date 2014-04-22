@@ -7,6 +7,7 @@ abstract class Property extends Tile
    public Player owner;
    private String name;
    public int number;
+   private ArrayList<Player> guests = new ArrayList<Player>();
 
    public Property(int num, int p, String n)
    {
@@ -15,8 +16,11 @@ abstract class Property extends Tile
       name = n;
    }
 
-   private landedOn(Player p)
+   public void landedOn(Player p)
    {
+      guests.add(p);
+      updateGraphics();
+
       if (owner == null) 
       {
          int response = JOptionPane.showOptionDialog(
@@ -49,5 +53,13 @@ abstract class Property extends Tile
       }
    }
 
+   public void leave(Player p)
+   {
+      guests.remove(p);
+      updateGraphics();
+   }
+
    private abstract void payRent(Player p);
+
+   private abstract void updateGraphics();
 }

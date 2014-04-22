@@ -5,6 +5,7 @@ class Player
    private int doubles, rollResult, funds = 0; nonCashAssets = 0;
    public ArrayList<Property> deeds = new ArrayList<Property>();
    public String name;
+   public Tile currentTile = tileList.get(0);
 
    public Player(String n)
    {
@@ -53,14 +54,36 @@ class Player
    // specific destination Tile.
    public void move(int n)
    {
-      // Move n number of spaces forward.
-   	  // If Go is passed, funds+= 200;
+      int space = currentTile.getNumber() + n;
+
+      if (space > 40)
+      {
+         funds += 200;
+         space = space - 40;  
+      } 
+
+      currentTile.leave(this);
+
+      Tile destinationTile = tileList(space);
+      destinationTile.landedOn(this);
+
+      // currentTile.updateGraphics(false);
+      // destinationTile.updateGraphics(true);
+
+      currentTile = destinationTile;
    }
 
-   private void move(Tile destination, boolean toJail)
+   private void move(int destination, boolean toJail)
    {
       if (!toJail)
       {
+         Tile destinationTile = tileList.get(destination);
+         destinationTile.landedOn(this);
+         currentTile.repaint();
+         destinationTile.repaint();
+
+         currentTile = destinationTile;
+
          // if Go is between position and destination, funds += 200;
          // Call landedOn method of Tile
       }

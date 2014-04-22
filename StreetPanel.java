@@ -15,13 +15,18 @@ class StreetPanel extends JPanel
       name = s.name;
       width = 100;
       height = 30;
-      angle = (s.number % 10) * 90;
+      angle = (s.getNumber() / 10) * 90;
 
       // Center the text (maybe) from: http://stackoverflow.com/questions/3213045/centering-text-in-a-jtextarea-or-jtextpane-horizontal-text-alignment
       StyledDocument doc = textPane.getStyledDocument();
       SimpleAttributeSet center = new SimpleAttributeSet();
       StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
       doc.setParagraphAttributes(0, doc.getLength(), center, false);
+   }
+
+   public void update()
+   {
+      // change some stuff 
    }
 
    public void paintComponent (Graphics g2)
@@ -39,5 +44,8 @@ class StreetPanel extends JPanel
       g.drawRectangle(0,0,width,height);
       g.drawLine(0,height/4,width,height/4);
       g.drawString(name,width/2,height+20);
+
+      g.rotate(-(Math.toRadians(angle)));
+   }
 
 }

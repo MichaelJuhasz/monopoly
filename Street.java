@@ -10,11 +10,16 @@ class Street extends Property
    private ArrayList<Street> group = new ArrayList<Street>();
    private boolean monopoly = false;
 
+   private StreetPanel streetpanel;
+
    public Street(int num, int r, int one, int two, int three, int four, 
    	               int htl, int p, int bldgC, String n, Color c, 
    	               Street g1, Street g2, Street g3)
    {
-   	  super(num, p, n);
+   	super(num, p, n);
+
+      streetpanel = new StreetPanel(this);
+
       rent = r;
       oneHs = one;
       twoHs = two;
@@ -31,38 +36,6 @@ class Street extends Property
 
       houses = 0;
    }
-
-   // private landedOn(Player p)
-   // {
-   //    if (owner == null) 
-   //    {
-   //       int response = JOptionPane.showOptionDialog(
-   //       	               null,
-   //       	               "Do you want to buy "+name+" for "+price+"?",
-   //       	               name,
-   //       	               JOptionPane.YES_NO_OPTION,
-   //       	               JOptionPane.PLAIN_MESSAGE,
-   //       	               null,
-   //       	               {"Buy", "Pass"},
-   //       	               "Buy"
-   //       	            );
-   //       if (response == 0)
-   //       {
-   //          if (p.getFunds() < price) JOptionPane.showMessageDialog(null,"Not enough funds!","Not enough funds!", JOptionPane.ERROR_MESSAGE);
-   //          else 
-   //          {
-   //             p.payment(price);
-   //             owner = p;
-   //             JOptionPane.showMessageDialog("Congratulations, you now own "+name, name+" purchased", JOptionPane.INFORMATION_MESSAGE);
-   //          }
-   //       }
-   //    }
-
-   //    else if (owner != p) 
-   //    {
-   //       payRent(p);
-   //    }
-   // }
 
    private void payRent(Player p)
    {
@@ -131,5 +104,15 @@ class Street extends Property
 
 	      else JOptionPane.showMessageDialog("You must own all properties of this color before any can be upgraded.", "Cannot Upgrade.", JOptionPane.ERROR_MESSAGE);
       }
+   }
+
+   private void updateGraphics()
+   {
+      streetpanel.update();
+   }
+
+   public JPanel getPanel()
+   {
+      return streetpanel;
    }
 }
