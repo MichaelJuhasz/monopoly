@@ -1,8 +1,13 @@
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 class Player
 {
 
    private boolean myTurn, canRoll, canUpgrade, canPayFine, inJail;
-   private int doubles, rollResult, funds = 0; nonCashAssets = 0;
+   private int doubles, rollResult;
+   private int funds = 0;
+   private int nonCashAssets = 0;
    public ArrayList<Property> deeds = new ArrayList<Property>();
    public String name;
    public Tile currentTile = tileList.get(0);
@@ -21,7 +26,7 @@ class Player
       myTurn = true;
       canRoll = true;
       if (inJail) canPayFine = true;
-      if (deeds.length > 0) canUpgrade = true;
+      if (!deeds.isEmpty()) canUpgrade = true;
    }
 
    public void endTurn()
@@ -98,7 +103,7 @@ class Player
       if (inJail) 
       {
          inJail = false;
-         JOptionPane.showMessageDialog(null,"Good job, you got out of jail!","Got out of Jail");
+         JOptionPane.showMessageDialog(null,"Good job, you got out of jail!", "Got out of Jail", JOptionPane.INFORMATION_MESSAGE);
       }
 
       if (doubles == 3) goToJail();
@@ -115,6 +120,7 @@ class Player
    {
       if (canPayFine)
       {
+         Object [] options = {"Pay Fine", "Not this turn"};
          int response = JOptionPane.showOptionDialog(
 	                       null,
 	                       "Do you want to $50 to get out of jail?",
@@ -122,8 +128,8 @@ class Player
 	                       JOptionPane.YES_NO_OPTION,
 	                       JOptionPane.PLAIN_MESSAGE,
 	                       null,
-	                       {"Pay Fine", "Not this turn"},
-	                       "Pay Fine"
+	                       options,
+	                       options[0]
 	                    );
          if (response == 0)
          {
@@ -156,21 +162,23 @@ class Player
    {
       if(canUpgrade)
       {
-         String [] names = new String[deeds.length];
-         for (int i = 0; i < deeds.length; i++)
+         Object [] names = new String[deeds.size()];
+         for (int i = 0; i < deeds.size(); i++)
          {
-            names[i] = deeds[i].name;
+            names[i] = deeds.get(i).name;
          }
 
-         int result = JOptionPane.showInputDialog(null, 
+         Object result = JOptionPane.showInputDialog(null, 
          	                        "Which property do you want to upgrade?",
          	                        "Property Upgrade",
          	                        JOptionPane.QUESTION_MESSAGE,
-         	                        null,
+         	                        null, 
          	                        names,
          	                        names[0]
          	                     );
-         deeds[result].upgrade(this);
+         if (result instanceof Integer) {        	 
+            deeds.get(((Integer) result).intValue()).upgrade(this);
+         }
       }
    }
 

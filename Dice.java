@@ -1,3 +1,6 @@
+import java.awt.*;
+import java.util.Random;
+
 import javax.swing.*;
 
 class Dice extends JPanel
@@ -9,11 +12,13 @@ class Dice extends JPanel
    private ImageIcon four = createImageIcon("images/four.png");
    private ImageIcon five = createImageIcon("images/five.png");
    private ImageIcon six = createImageIcon("images/six.png");
-   JLabel dieOne = new JLabel();
-   JLabel dieTwo = new JLabel();
-
+   JLabel dieOne;
+   JLabel dieTwo;
+   
    public Dice()
    {  
+	  dieOne = new JLabel();
+	  dieTwo = new JLabel();
       setLayout(new GridLayout(1,2));
       add(dieOne);
       add(dieTwo);
@@ -22,8 +27,8 @@ class Dice extends JPanel
    public static int roll(Player p)
    {
       Random rand = new Random();
-      roll1 = rand.nextInt(6) + 1;
-      roll2 = rand.nextInt(6) + 1;
+      int roll1 = rand.nextInt(6) + 1;
+      int roll2 = rand.nextInt(6) + 1;
 
       if (roll1 == roll2) p.doubleRoll();
 
@@ -44,7 +49,7 @@ class Dice extends JPanel
          case 3: die.setIcon(three);
                  break;
          case 4: die.setIcon(four);
-                 break;      }
+                 break;
          case 5: die.setIcon(five);
                  break;
          case 6: die.setIcon(six);

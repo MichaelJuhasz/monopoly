@@ -1,11 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 abstract class Property extends Tile
 {
    private int price;
    public Player owner;
-   private String name;
+   public String name;
    public int number;
    private ArrayList<Player> guests = new ArrayList<Player>();
 
@@ -23,6 +24,7 @@ abstract class Property extends Tile
 
       if (owner == null) 
       {
+    	  Object [] options = {"Buy", "Pass"};
          int response = JOptionPane.showOptionDialog(
          	               null,
          	               "Do you want to buy "+name+" for "+price+"?",
@@ -30,8 +32,8 @@ abstract class Property extends Tile
          	               JOptionPane.YES_NO_OPTION,
          	               JOptionPane.PLAIN_MESSAGE,
          	               null,
-         	               {"Buy", "Pass"},
-         	               "Buy"
+         	               options,
+         	               options[0]
          	            );
          if (response == 0)
          {
