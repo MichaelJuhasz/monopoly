@@ -60,7 +60,7 @@ class Street extends Property
          }
 
       }
-      p.payment(toll * -1);
+      p.payment(-toll);
       owner.payment(toll);
    }
 
@@ -108,9 +108,10 @@ class Street extends Property
 
    private void updateGraphics()
    {
-      streetpanel.update();
+      streetpanel.update(guests, houses);
    }
 
+   // Used by main to instantiate StreetPanel objects. 
    public JPanel getPanel()
    {
       return streetpanel;

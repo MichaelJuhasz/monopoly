@@ -6,17 +6,17 @@ class Utility extends Property
    public Player owner;
    public String name;
    private int price;
+   private PropertyPanel utilityPanel;
 
    public Utility(int num, String n)
    {
       super(num, 150, n);
-      //name = n;
-      //price = 150;
+      utilityPanel = new PropertyPanel(this);
    }
 
    private void payRent(Player p)
    {
-   	  int toll;
+   	int toll;
       if (owner.getDeeds().contains("Electric Company") &&
       	  owner.getDeeds().contains("Water Works"))
       {
@@ -27,6 +27,16 @@ class Utility extends Property
 
       p.payment(toll * -1);
       owner.payment(toll);
+   }
+
+   private void updateGraphics()
+   {
+      utilityPanel.update(guests);
+   }
+
+   public JPanel getPanel()
+   {
+      return utilityPanel;
    }
 }
 

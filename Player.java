@@ -1,3 +1,6 @@
+import javax.swing.*;
+import java.awt.*;
+
 class Player
 {
 
@@ -6,10 +9,12 @@ class Player
    public ArrayList<Property> deeds = new ArrayList<Property>();
    public String name;
    public Tile currentTile = tileList.get(0);
+   private ImageIcon token;
 
-   public Player(String n)
+   public Player(String n, ImageIcon icon)
    {
       name = n;
+      token = icon;
       // icon should be set somehow.
    } 
 
@@ -66,9 +71,6 @@ class Player
 
       Tile destinationTile = tileList(space);
       destinationTile.landedOn(this);
-
-      // currentTile.updateGraphics(false);
-      // destinationTile.updateGraphics(true);
 
       currentTile = destinationTile;
    }
@@ -196,5 +198,10 @@ class Player
    public int getTotalWorth()
    {
       return funds + nonCashAssets;
+   }
+
+   public ImageIcon getIcon()
+   {
+      return token;
    }
 }

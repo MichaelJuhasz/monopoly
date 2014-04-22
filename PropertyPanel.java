@@ -1,24 +1,19 @@
 import javax.swing.*;
 import java.awt.*;
 
-class StreetPanel extends JPanel
+class PropertyPanel extends JPanel
 {
    private String name;
-   private Color color;
-   private Street street;
-   private int width, height, angle, houses;
+   private int width, height, angle;
    private ArrayList<Player> guests = new ArrayList<Player>();
    //private ArrayList<BufferedImage> tokens = new ArrayList<BufferedImage>();
 
-   public StreetPanel(Street s)
+   public PropertyPanel(Utility u)
    {
-      street = s;
-      color = s.color;
-      name = s.name;
+      name = u.name;
       width = 50;
       height = 100;
-      houses = 0;
-      angle = (s.getNumber() / 10) * 90;
+      angle = (u.getNumber() / 10) * 90;
 
       // Center the text (maybe) from: http://stackoverflow.com/questions/3213045/centering-text-in-a-jtextarea-or-jtextpane-horizontal-text-alignment
       StyledDocument doc = textPane.getStyledDocument();
@@ -27,11 +22,9 @@ class StreetPanel extends JPanel
       doc.setParagraphAttributes(0, doc.getLength(), center, false);
    }
 
-   public void update(ArrayList<Player> g, int h)
+   public void update(ArrayList<Player> g)
    {
-      houses = h;
       guests = g;
-
    }
 
    public void paintComponent (Graphics g2)
@@ -44,35 +37,13 @@ class StreetPanel extends JPanel
       // Rotate tile accorinding to position on the board (i.e. its number)
       g.rotate(Math.toRadians(angle));
 
-      // Draw colored box 
-      g.setColor(color);
-      g.fillRectangle(0,0,width,height/4);
-
       // Draw border around tile
       g.setColor(Color.BLACK);
       g.setStroke(new BasicStroke(3));
       g.drawRectangle(0,0,width,height);
-      g.drawLine(0,height/4,width,height/4);
 
       // Write name of tile
       g.drawString(name,width/2,height+20);
-
-      // Draw houses or hotel
-      g.setStroke(new BasicStroke(1));
-      int houseWidth = (width - 10) / 4;
-      if (houses > 0 && houses < 5)
-      {
-         for (int i = 0; i < houses; i++)
-         {
-            g.setColor(Color.GREEN);
-            g.fillRectangle((5 + (i * houseWidth)), 5, houseWidth, (height/4)- 5);
-         }
-      }
-      else if (houses == 5)
-      {
-         g.setColor(Color.RED);
-         g.fillRectangle((5 + houseWidth), 5, houseWidth * 2, (height/4)- 5);
-      }
 
       // Draw any player tokens that are sitting on this tile
       if (!guests.isEmpty())
