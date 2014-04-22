@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-class Corner extends Tile
+abstract class Corner extends Tile
 {
    public String name;
    public int number;
@@ -14,5 +14,16 @@ class Corner extends Tile
    } 
 
    private void landedOn()
-   {}
+   {
+      guests.add(p);
+      updateGraphics();
+   }
+
+   public void leave(Player p)
+   {
+      guests.remove(p);
+      updateGraphics();
+   }
+
+   private abstract void updateGraphics()
 }

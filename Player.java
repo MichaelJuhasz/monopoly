@@ -5,7 +5,6 @@ import java.awt.*;
 
 class Player
 {
-
    private boolean myTurn, canRoll, canUpgrade, canPayFine, inJail;
    private int doubles, rollResult;
    private int funds = 0;
@@ -19,7 +18,6 @@ class Player
    {
       name = n;
       token = icon;
-      // icon should be set somehow.
    } 
 
    // This method will control the graphics (populating the sidebar with 
