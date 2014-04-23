@@ -1,5 +1,7 @@
 import javax.swing.*;
+
 import java.awt.*;
+import java.util.ArrayList;
 
 class GoToJailPanel extends JPanel
 {
@@ -30,7 +32,7 @@ class GoToJailPanel extends JPanel
       // Draw border around tile
       g.setColor(Color.BLACK);
       g.setStroke(new BasicStroke(3));
-      g.drawRectangle(0,0,width,height);
+      g.drawRect(0,0,width,height);
 
       // Write name of tile
       g.drawString("GO TO JAIL!",width/2,height+20);
@@ -40,8 +42,9 @@ class GoToJailPanel extends JPanel
       {
          for (int i = 0; i < guests.size(); i++)
          {
-            BufferedImage icon = guests.get(i).getIcon();
-            g.drawImage(icon, (5 + (i * houseWidth)), height/2, null);
+            ImageIcon icon = guests.get(i).getIcon();
+            //           g.drawImage(icon, (5 + (i * houseWidth)), height/2, null);
+            g.drawImage(icon.getImage(), (5 + (i * icon.getIconWidth())), height/2, null);
          }
       }
 
