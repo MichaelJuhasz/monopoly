@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 
 class Monopoly 
 {
@@ -152,13 +153,18 @@ class Monopoly
       return gameBoard;
    }
 
+
    public static void main(String [] args)
    {
       JFrame gameWindow = new JFrame("Monopoly");
       JPanel gameBoard = setUpBoard();
       gameWindow.add(gameBoard, BorderLayout.CENTER);
+      
+      ControlPanel controlPanel = new ControlPanel();
+      gameWindow.add(controlPanel, BorderLayout.EAST);
+      
       gameWindow.setVisible(true);
-      gameWindow.setSize(650,650);
+      gameWindow.setSize(850,650);
       gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
    }
 }

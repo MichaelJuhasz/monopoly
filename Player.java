@@ -33,17 +33,30 @@ class Player
 
    public void endTurn()
    {
-      // Print a message asking if player is sure.
-      myTurn = false;
-      canRoll = false;
-      canPayFine = false;
-      canUpgrade = false;
-      doubles = 0;
+      Object [] options = {"End Turn", "Not Yet"};
+      int response = JOptionPane.showOptionDialog(
+                          null,
+                          "Are you sure you want to end your turn?",
+                          "End Turn",
+                          JOptionPane.YES_NO_OPTION,
+                          JOptionPane.PLAIN_MESSAGE,
+                          null,
+                          options,
+                          options[1]
+                       );
+      if (response == 0)      
+      {
+         myTurn = false;
+         canRoll = false;
+         canPayFine = false;
+         canUpgrade = false;
+         doubles = 0;
+      }
    }
    
    // This should get called by a button in the sidebar, which 
    // should be visible so long as canRoll is true.
-   private void rollDice()
+   public void rollDice()
    {
       if(canRoll && !inJail)
       {
@@ -112,8 +125,8 @@ class Player
       move(10, true);
    }
 
-   // Called by button in sidebar that is visible when canPayFine is true.
-   private void getOutOfJail()
+   // Called by button in control panel that is visible when canPayFine is true.
+   public void getOutOfJail()
    {
       if (canPayFine)
       {
@@ -155,7 +168,8 @@ class Player
       deeds.add(p);
    }
 
-   private void upgrade()
+   // Another method called by a control panel button
+   public void upgrade()
    {
       if(canUpgrade)
       {
@@ -206,5 +220,25 @@ class Player
    public ImageIcon getIcon()
    {
       return token;
+   }
+
+   public boolean getCanRoll()
+   {
+      return canRoll;
+   }
+
+   public boolean getCanUpgrade()
+   {
+      return canUpgrade;
+   }
+
+   public boolean getPayFine()
+   {
+      return canPayFine;
+   }
+
+   public String getName()
+   {
+      return name;
    }
 }
