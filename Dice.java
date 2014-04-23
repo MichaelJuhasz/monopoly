@@ -1,30 +1,39 @@
 import java.awt.*;
 import java.util.Random;
-
 import javax.swing.*;
 
 class Dice extends JPanel
 {
-   private int roll1, roll2;
-   private ImageIcon one = createImageIcon("images/one.png");
-   private ImageIcon two = createImageIcon("images/two.png");
-   private ImageIcon three = createImageIcon("images/three.png");
-   private ImageIcon four = createImageIcon("images/four.png");
-   private ImageIcon five = createImageIcon("images/five.png");
-   private ImageIcon six = createImageIcon("images/six.png");
+   private ImageIcon one = new ImageIcon("images/one.png");
+   private ImageIcon two = new ImageIcon("images/two.png");
+   private ImageIcon three = new ImageIcon("images/three.png");
+   private ImageIcon four = new ImageIcon("images/four.png");
+   private ImageIcon five = new ImageIcon("images/five.png");
+   private ImageIcon six = new ImageIcon("images/six.png");
    JLabel dieOne;
    JLabel dieTwo;
    
-   public Dice()
+   // this is a singleton
+   private static Dice instance = null;
+   
+   public synchronized static Dice getInstance() 
+   {
+      if (instance == null) {
+         instance = new Dice();
+      }
+      return instance;
+   }
+   
+   protected Dice()
    {  
-	  dieOne = new JLabel();
-	  dieTwo = new JLabel();
+	  dieOne = new JLabel(one);
+	  dieTwo = new JLabel(six);
       setLayout(new GridLayout(1,2));
       add(dieOne);
       add(dieTwo);
    }
 
-   public static int roll(Player p)
+   public int roll(Player p)
    {
       Random rand = new Random();
       int roll1 = rand.nextInt(6) + 1;

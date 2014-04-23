@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 abstract class Corner extends Tile
 {
@@ -9,21 +10,22 @@ abstract class Corner extends Tile
 
    public Corner (int num, String n)
    {
-   	number = num;
+      number = num;
       name = n;
    } 
 
-   private void landedOn()
+   void landedOn(Player p)
    {
-      guests.add(p);
-      updateGraphics();
+	  guests.add(p);
+	  updateGraphics();
    }
-
+   
    public void leave(Player p)
    {
-      guests.remove(p);
-      updateGraphics();
+	   guests.remove(p);
+	   updateGraphics();
    }
 
-   private abstract void updateGraphics()
+   private void updateGraphics()
+   {}
 }

@@ -47,13 +47,13 @@ class Player
    {
       if(canRoll && !inJail)
       {
-         rollResult = Dice.roll(this);
+         rollResult = Dice.getInstance().roll(this);
          if (doubles == 0 || doubles >= 3) canRoll = false;
          move(rollResult);
       }
       else if (canRoll && inJail)
       {
-         int gotOut = Dice.roll(this);
+         int gotOut = Dice.getInstance().roll(this);
       }
    }
 
