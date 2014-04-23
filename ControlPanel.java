@@ -4,14 +4,14 @@ import java.awt.event.*;
 
 class ControlPanel extends JPanel implements ActionListener
 {
-   private JLabel player = new JLabel();
+   private JLabel label = new JLabel();
    private JButton roll = new JButton ("Roll Dice");
    private JButton upgrade = new JButton ("Upgrade Property");
    private JButton fine = new JButton ("Pay Fine");
    private JButton end = new JButton ("End Turn");
    private Player player;
 
-   public controlPanel()
+   public ControlPanel()
    {
       setLayout(new GridBagLayout());
       
@@ -19,15 +19,15 @@ class ControlPanel extends JPanel implements ActionListener
       labelC.fill = GridBagConstraints.HORIZONTAL;
       labelC.gridx = 0;
       labelC.gridy = 0;
-      labelC.width = 2;
+      labelC.gridwidth = 2;
       labelC.ipady = 20;
-      add(player, labelC);
+      add(label, labelC);
 
       GridBagConstraints rollC = new GridBagConstraints();
       rollC.fill = GridBagConstraints.HORIZONTAL;
       rollC.gridx = 0;
       rollC.gridy = 1;
-      rollC.width = 2;
+      rollC.gridwidth = 2;
       roll.addActionListener(this);
       add(roll, rollC);
 
@@ -49,7 +49,7 @@ class ControlPanel extends JPanel implements ActionListener
       endC.fill = GridBagConstraints.HORIZONTAL;
       endC.gridx = 0;
       endC.gridy = 3;
-      endC.width = 2;
+      endC.gridwidth = 2;
       end.addActionListener(this);
       add(end, endC);
    }
@@ -77,7 +77,7 @@ class ControlPanel extends JPanel implements ActionListener
 
       if (b == fine)
       {
-         if (player.getCanPayFine()) player.getOutOfJail();
+         if (player.getPayFine()) player.getOutOfJail();
          else JOptionPane.showMessageDialog(null,"You're not in jail.","No fines to pay!", JOptionPane.ERROR_MESSAGE);
       }
 

@@ -36,15 +36,21 @@ class Street extends Property
 
    public void setGroup(Street s1, Street s2, Street s3)
    {
-      group.add(s1);
-      group.add(s2);
-      group.add(s3);
+	  if (group.isEmpty())
+	  {
+         group.add(s1);
+         group.add(s2);
+         group.add(s3);
+	  }
    }
 
    public void setGroup(Street s1, Street s2)
    {
-      group.add(s1);
-      group.add(s2);
+	  if (group.isEmpty()) 
+	  {
+         group.add(s1);
+         group.add(s2);
+	  }
    }
 
    private void payRent(Player p)
