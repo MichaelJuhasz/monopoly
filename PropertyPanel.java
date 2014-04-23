@@ -11,7 +11,7 @@ class PropertyPanel extends JPanel
    private ArrayList<Player> guests = new ArrayList<Player>();
    //private ArrayList<BufferedImage> tokens = new ArrayList<BufferedImage>();
 
-   public PropertyPanel(Utility u)
+   public PropertyPanel(Propterty u)
    {
       name = u.name;
       width = 50;

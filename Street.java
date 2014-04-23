@@ -14,8 +14,7 @@ class Street extends Property
    private StreetPanel streetpanel;
 
    public Street(int num, int r, int one, int two, int three, int four, 
-   	               int htl, int p, int bldgC, String n, Color c, 
-   	               Street g1, Street g2, Street g3)
+   	               int htl, int p, int bldgC, String n, Color c)
    {
    	super(num, p, n);
 
@@ -31,11 +30,21 @@ class Street extends Property
       bldgCost = bldgC;
       //name = n;
       color = c;
-      group.add(g1);
-      group.add(g2);
-      group.add(g3);
 
       houses = 0;
+   }
+
+   public void setGroup(Street s1, Street s2, Street s3)
+   {
+      group.add(s1);
+      group.add(s2);
+      group.add(s3);
+   }
+
+   public void setGroup(Street s1, Street s2)
+   {
+      group.add(s1);
+      group.add(s2);
    }
 
    private void payRent(Player p)
@@ -71,7 +80,7 @@ class Street extends Property
       {
          if (group.get(0).owner == group.get(1).owner) monopoly = true;
       }
-      else if (group.size() ==3)
+      else if (group.size() == 3)
       {
          if (group.get(0).owner == group.get(1).owner &&
          	 group.get(1).owner == group.get(2).owner) monopoly = true;

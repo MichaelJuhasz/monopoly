@@ -18,7 +18,8 @@ class Dice extends JPanel
    
    public synchronized static Dice getInstance() 
    {
-      if (instance == null) {
+      if (instance == null) 
+      {
          instance = new Dice();
       }
       return instance;
@@ -26,8 +27,8 @@ class Dice extends JPanel
    
    protected Dice()
    {  
-	  dieOne = new JLabel(one);
-	  dieTwo = new JLabel(six);
+	    dieOne = new JLabel(one);
+	    dieTwo = new JLabel(six);
       setLayout(new GridLayout(1,2));
       add(dieOne);
       add(dieTwo);

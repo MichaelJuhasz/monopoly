@@ -4,18 +4,19 @@ import java.awt.event.*;
 
 class Monopoly 
 {
-   public static void main (String[] args)
-   {
-   	  Color purple = new Color(195,67,238);
-   	  Color lightBlue = new Color(165,225,232);
-   	  Color pink = new Color(230,0,176);
-   	  Color oragne = new Color(255,150,31);
-   	  Color red = new Color (255,31,31);
-   	  Color yellow = new Color (255,236,31);
-   	  Color green = new Color(6,125,8);
-   	  Color darkBlue = new Color(6,48,125);
+   public ArrayList<Tile> tileList = new ArrayList<Tile>();
 
-      ArrayList<Tile> tileList = new ArrayList<Tile>();
+   public static JPanel setUpBoard ()
+   {
+      Color purple = new Color(195,67,238);
+   	Color lightBlue = new Color(165,225,232);
+      Color pink = new Color(230,0,176);
+   	Color oragne = new Color(255,150,31);
+   	Color red = new Color (255,31,31);
+   	Color yellow = new Color (255,236,31);
+   	Color green = new Color(6,125,8);
+   	Color darkBlue = new Color(6,48,125);
+
       // Bottom of the baord
       tileList.add(Go tile1 = new Go());
       tileList.add(Street tile2 = new Street(2,2,10,30,90,160,250,60,50,"MEDDITERRANEAN AVENUE",purple));
@@ -63,5 +64,101 @@ class Monopoly
       tileList.add(Street tile38 = new Street(38,35,175,500,1100,1300,1500,350,200,"PARK PLACE",darkBlue));
       tileList.add(TaxTile tile39 = new TaxTile(39,"LUXORY TAX",TaxTile.TaxType.LUXORY));
       tileList.add(Street tile40 = new Street(40,50,200,600,1400,1700,2000,400,200,"BOARDWALK",darkBlue));
+   
+      // After all the Streets have been instantiated, we can group them (tediously)  
+      
+      // Purples 
+      tileList.get(1).setGroup(tileList.get(1), tileList.get(3));
+      tileList.get(3).setGroup(tileList.get(1), tileList.get(3));
+
+      // Light Blues
+      tileList.get(6).setGroup(tileList.get(6), tileList.get(8), tileList.get(9));
+      tileList.get(8).setGroup(tileList.get(6), tileList.get(8), tileList.get(9));
+      tileList.get(9).setGroup(tileList.get(6), tileList.get(8), tileList.get(9));
+
+      // Pinks
+      tileList.get(11).setGroup(tileList.get(11), tileList.get(13), tileList.get(14));
+      tileList.get(13).setGroup(tileList.get(11), tileList.get(13), tileList.get(14));
+      tileList.get(14).setGroup(tileList.get(11), tileList.get(13), tileList.get(14));
+
+      // Oranges
+      tileList.get(16).setGroup(tileList.get(16), tileList.get(18), tileList.get(19));
+      tileList.get(18).setGroup(tileList.get(16), tileList.get(18), tileList.get(19));
+      tileList.get(19).setGroup(tileList.get(16), tileList.get(18), tileList.get(19));
+
+      // Reds
+      tileList.get(21).setGroup(tileList.get(21), tileList.get(23), tileList.get(24));
+      tileList.get(23).setGroup(tileList.get(21), tileList.get(23), tileList.get(24));
+      tileList.get(24).setGroup(tileList.get(21), tileList.get(23), tileList.get(24));
+
+      // Yellows
+      tileList.get(26).setGroup(tileList.get(26), tileList.get(28), tileList.get(29));
+      tileList.get(28).setGroup(tileList.get(26), tileList.get(28), tileList.get(29));
+      tileList.get(19).setGroup(tileList.get(26), tileList.get(28), tileList.get(29));
+
+      // Greens 
+      tileList.get(31).setGroup(tileList.get(31), tileList.get(32), tileList.get(34));
+      tileList.get(31).setGroup(tileList.get(31), tileList.get(32), tileList.get(34));
+      tileList.get(31).setGroup(tileList.get(31), tileList.get(32), tileList.get(34));
+
+      // Dark Blues
+      tileList.get(37).setGroup(tileList.get(37), tileList.get(39));
+      tileList.get(39).setGroup(tileList.get(37), tileList.get(39));
+
+      // Grab the various JPanels instantiated by the Tile instances and
+      // group them into other JPanels
+      JPanel south = new JPanel (new BoxLayout(this, BoxLayout.LINE_AXIS));
+      south.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+      
+      // west needs to be loaded backwards, with the largest element loaded first
+      JPanel west = new JPanel (new BoxLayout(this, BoxLayout.PAGE_AXIS));
+
+      JPanel north = new JPanel(new BoxLayout(this, BoxLayout.LINE_AXIS));
+
+      JPanel east = new JPanel (new BoxLayout(this, BoxLayout.PAGE_AXIS));
+
+      // Because we'll be using BorderLayout from the gameboard panel, 
+      // and because of how regions overlap in BorderLayout, the south 
+      // and north panels must contain all the corners.
+      
+      // This should be "GO" through "JAIL"
+      for (int i = 0; i < 11; i++)
+      {
+         south.add(tileList.get(i).getPanel());
+      }
+
+      for (int i = 19; i >= 11; i--)
+      {
+         west.add(tileList.get(i).getPanel());
+      }
+
+      for (int i = 20; i < 31; i++)
+      {
+         north.add(tileList.get(i).getPanel());
+      }
+
+      for (int i = 31; i < 40; i++)
+      {
+         east.add(tileList.get(i).getPanel());
+      }
+
+      // Make the game board JPanel and load it with these guys
+      public JPanel gameBoard = new JPanel(new BorderLayout());
+      gameBoard.add(south, BorderLayout.SOUTH);
+      gameBoard.add(west, BorderLayout.WEST);
+      gameBoard.add(north, BorderLayout.NORTH);
+      gameBoard.add(east, BorderLayout.EAST);
+
+      return gameBoard;
+   }
+
+   public static void main(String [] args)
+   {
+      JFrame gameWindow = new JFrame("Monopoly");
+      JPanel gameBoard = setUpBoard();
+      gameWindow.add(gameBoard, BorderLayout.CENTER);
+      gameWindow.setVisible(true);
+      gameWindow.setSize(650,650);
+      gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
    }
 }

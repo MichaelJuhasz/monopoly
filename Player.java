@@ -71,7 +71,7 @@ class Player
 
       currentTile.leave(this);
 
-      Tile destinationTile = tileList(space);
+      Tile destinationTile = tileList.get(space);
       destinationTile.landedOn(this);
 
       currentTile = destinationTile;
@@ -81,18 +81,16 @@ class Player
    {
       if (!toJail)
       {
-         Tile destinationTile = tileList.get(destination);
-         destinationTile.landedOn(this);
-         currentTile.repaint();
-         destinationTile.repaint();
-
-         currentTile = destinationTile;
-
          // if Go is between position and destination, funds += 200;
          // Call landedOn method of Tile
       }
 
-      // Draw token on this Tile
+      currentTile.leave(this);
+
+      Tile destinationTile = tileList.get(destination);
+      destinationTile.landedOn(this);
+
+      currentTile = destinationTile;
    }
 
    public void doubleRoll()
@@ -111,7 +109,7 @@ class Player
    public void goToJail()
    {
       inJail = true;
-      move(/*jail*/, true);
+      move(10, true);
    }
 
    // Called by button in sidebar that is visible when canPayFine is true.
@@ -122,7 +120,7 @@ class Player
          Object [] options = {"Pay Fine", "Not this turn"};
          int response = JOptionPane.showOptionDialog(
 	                       null,
-	                       "Do you want to $50 to get out of jail?",
+	                       "Do you want to pay $50 to get out of jail?",
 	                       "Get Out of Jail",
 	                       JOptionPane.YES_NO_OPTION,
 	                       JOptionPane.PLAIN_MESSAGE,
