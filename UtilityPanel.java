@@ -1,5 +1,7 @@
 import javax.swing.*;
+
 import java.awt.*;
+import java.util.ArrayList;
 
 class UtilityPanel extends JPanel
 {
@@ -15,11 +17,13 @@ class UtilityPanel extends JPanel
       height = 100;
       angle = (u.getNumber() / 10) * 90;
 
+      /*
       // Center the text (maybe) from: http://stackoverflow.com/questions/3213045/centering-text-in-a-jtextarea-or-jtextpane-horizontal-text-alignment
       StyledDocument doc = textPane.getStyledDocument();
       SimpleAttributeSet center = new SimpleAttributeSet();
       StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
       doc.setParagraphAttributes(0, doc.getLength(), center, false);
+      */
    }
 
    public void update(ArrayList<Player> g)
@@ -40,7 +44,7 @@ class UtilityPanel extends JPanel
       // Draw border around tile
       g.setColor(Color.BLACK);
       g.setStroke(new BasicStroke(3));
-      g.drawRectangle(0,0,width,height);
+      g.drawRect(0,0,width,height);
       g.drawLine(0,height/4,width,height/4);
 
       // Write name of tile
@@ -51,8 +55,9 @@ class UtilityPanel extends JPanel
       {
          for (int i = 0; i < guests.size(); i++)
          {
-            BufferedImage icon = guests.get(i).getIcon();
-            g.drawImage(icon, (5 + (i * houseWidth)), height/2, null);
+            ImageIcon icon = guests.get(i).getIcon();
+           // g.drawImage(icon, (5 + (i * houseWidth)), height/2, null);
+            g.drawImage(icon.getImage(), (5 + (i * icon.getIconWidth())), height/2, null);
          }
       }
 

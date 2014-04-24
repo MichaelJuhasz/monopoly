@@ -1,5 +1,7 @@
 import javax.swing.*;
+
 import java.awt.*;
+import java.util.ArrayList;
 
 class StreetPanel extends JPanel
 {
@@ -20,11 +22,13 @@ class StreetPanel extends JPanel
       houses = 0;
       angle = (s.getNumber() / 10) * 90;
 
+     /*
       // Center the text (maybe) from: http://stackoverflow.com/questions/3213045/centering-text-in-a-jtextarea-or-jtextpane-horizontal-text-alignment
       StyledDocument doc = textPane.getStyledDocument();
       SimpleAttributeSet center = new SimpleAttributeSet();
       StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
       doc.setParagraphAttributes(0, doc.getLength(), center, false);
+      */
    }
 
    public void update(ArrayList<Player> g, int h)
@@ -46,12 +50,12 @@ class StreetPanel extends JPanel
 
       // Draw colored box 
       g.setColor(color);
-      g.fillRectangle(0,0,width,height/4);
+      g.fillRect(0,0,width,height/4);
 
       // Draw border around tile
       g.setColor(Color.BLACK);
       g.setStroke(new BasicStroke(3));
-      g.drawRectangle(0,0,width,height);
+      g.drawRect(0,0,width,height);
       g.drawLine(0,height/4,width,height/4);
 
       // Write name of tile
@@ -65,13 +69,13 @@ class StreetPanel extends JPanel
          for (int i = 0; i < houses; i++)
          {
             g.setColor(Color.GREEN);
-            g.fillRectangle((5 + (i * houseWidth)), 5, houseWidth, (height/4)- 5);
+            g.fillRect((5 + (i * houseWidth)), 5, houseWidth, (height/4)- 5);
          }
       }
       else if (houses == 5)
       {
          g.setColor(Color.RED);
-         g.fillRectangle((5 + houseWidth), 5, houseWidth * 2, (height/4)- 5);
+         g.fillRect((5 + houseWidth), 5, houseWidth * 2, (height/4)- 5);
       }
 
       // Draw any player tokens that are sitting on this tile
@@ -79,8 +83,9 @@ class StreetPanel extends JPanel
       {
          for (int i = 0; i < guests.size(); i++)
          {
-            BufferedImage icon = guests.get(i).getIcon();
-            g.drawImage(icon, (5 + (i * houseWidth)), height/2, null);
+            ImageIcon icon = guests.get(i).getIcon();
+          //  g.drawImage(icon, (5 + (i * houseWidth)), height/2, null);
+            g.drawImage(icon.getImage(), (5 + (i * icon.getIconWidth())), height/2, null);
          }
       }
 

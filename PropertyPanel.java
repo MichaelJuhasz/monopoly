@@ -1,7 +1,5 @@
 import javax.swing.*;
-
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 class PropertyPanel extends JPanel
@@ -11,18 +9,20 @@ class PropertyPanel extends JPanel
    private ArrayList<Player> guests = new ArrayList<Player>();
    //private ArrayList<BufferedImage> tokens = new ArrayList<BufferedImage>();
 
-   public PropertyPanel(Propterty u)
+   public PropertyPanel(Property u)
    {
       name = u.name;
       width = 50;
       height = 100;
       angle = (u.getNumber() / 10) * 90;
 
+      /*
       // Center the text (maybe) from: http://stackoverflow.com/questions/3213045/centering-text-in-a-jtextarea-or-jtextpane-horizontal-text-alignment
       StyledDocument doc = textPane.getStyledDocument();
       SimpleAttributeSet center = new SimpleAttributeSet();
       StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
       doc.setParagraphAttributes(0, doc.getLength(), center, false);
+      */
    }
 
    public void update(ArrayList<Player> g)
@@ -54,7 +54,8 @@ class PropertyPanel extends JPanel
          for (int i = 0; i < guests.size(); i++)
          {
             ImageIcon icon = guests.get(i).getIcon();
-            g.drawImage(icon, (5 + (i * houseWidth)), height/2, null);
+           // g.drawImage(icon, (5 + (i * houseWidth)), height/2, null);
+            g.drawImage(icon.getImage(), (5 + (i * icon.getIconWidth())), height/2, null);
          }
       }
 
