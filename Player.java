@@ -31,7 +31,7 @@ class Player
       if (!deeds.isEmpty()) canUpgrade = true;
    }
 
-   public void endTurn()
+   public boolean endTurn()
    {
       Object [] options = {"End Turn", "Not Yet"};
       int response = JOptionPane.showOptionDialog(
@@ -51,7 +51,11 @@ class Player
          canPayFine = false;
          canUpgrade = false;
          doubles = 0;
+
+         return true;
       }
+
+      else return false;
    }
    
    // This should get called by a button in the sidebar, which 
@@ -232,7 +236,7 @@ class Player
       return canUpgrade;
    }
 
-   public boolean getPayFine()
+   public boolean getCanPayFine()
    {
       return canPayFine;
    }

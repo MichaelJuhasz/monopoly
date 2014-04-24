@@ -1,0 +1,62 @@
+/** 
+* Adapted from here: http://www.technicalypto.com/2010/01/linked-lists.html
+**/
+
+
+class CircularLinkedList
+{
+   private int size;
+   private Node head;
+
+   public CircularLinkedList()
+   {
+      head = null;
+      size = 0;
+   }  
+
+   public void add(Object data)
+   {
+      if (size == 0)
+      {
+         head = new Node(data, null);
+         head.setLink(head);
+      }
+      else 
+      {
+         Node currentNode = getNodeAt(size - 1);
+         Node newNode = new Node(data, head);
+         currentNode.setLink(newNode);
+      }
+      size++;
+   }
+
+   public Node getNodeAt(int nodePos)
+   {
+      if(nodePos >= size || nodePos < 0) return null;
+
+      Node temp = head;
+      for (int i = 0; i < nodePos; i++)
+      {
+         temp = temp.getLink();
+      }
+
+      return temp;
+   }
+
+   public void removeAt(int position)
+   {
+      Node tempNode = getNodeAt(position - 1);
+      tempNode.setLink(tempNode.getLink().getLink());
+      size--;
+   }
+
+   public int getSize()
+   {
+      return size;
+   }
+
+   public Node getNext(Node n)
+   {
+      return n.getLink();
+   }
+}

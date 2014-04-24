@@ -193,5 +193,44 @@ class Monopoly
       gameWindow.setVisible(true);
       gameWindow.setSize(850,650);
       gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+      int playerNum = JOptionPane.showInputDialog(
+                         null,
+                         "How many people are playing?",
+                         "Get ready to Monopolize",
+                         JOptionPane.PLAIN_MESSAGE,
+                         null
+                      );
+
+      // Player[] players = new Player[playerNum];
+      CircularLinkedList players = new CircularLinkedList();
+
+      for (int i = 1; i <= playerNum; i++)
+      {
+         String p = (String)JOptionPane.showInputDialog(
+                               null,
+                               "What's player "+i+"'s name?",
+                               "Get ready to Monopolize",
+                               JOptionPane.QUESTION_MESSAGE,
+                               null
+                            );
+         // icon stuff
+         String [] choices = {"Cannon", "Dog", "Hat", "Horse", "Iron", "Ship", "Thimbal", "Wheelbarrow"};
+         String iconChoice = (String)JOptionPane.showOptionDialog(
+                                   null, 
+                                   "Which token does player "+i+" want?",
+                                   "Get ready to Monopolize", 
+                                   JOptionPane.QUESTION_MESSAGE,
+                                   null,
+                                   choices,
+                                   choices[0]
+                                );
+         
+         ImageIcon icon = new ImageIcon("images/"+iconChoice+".png");
+
+         Player pl = new Player(p, icon);
+         
+         players.add(pl);
+      }
    }
 }

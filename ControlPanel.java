@@ -10,8 +10,9 @@ class ControlPanel extends JPanel implements ActionListener
    private JButton fine = new JButton ("Pay Fine");
    private JButton end = new JButton ("End Turn");
    private Player player;
+   private CircularLinkedList players;
 
-   public ControlPanel()
+   public ControlPanel(CircularLinkedList ps)
    {
       setLayout(new GridBagLayout());
       
@@ -52,6 +53,20 @@ class ControlPanel extends JPanel implements ActionListener
       endC.gridwidth = 2;
       end.addActionListener(this);
       add(end, endC);
+
+      players = ps;
+   }
+
+   public void run()
+   {
+      Node playerNode = players.getNodeAt(0)
+      takeATurn(playerNode.getData());
+
+      while()
+      {
+         playerNode = players.getNext(playerNode);
+         takeATurn(playerNode.getData());
+      }
    }
 
    public void takeATurn(Player p)
@@ -84,7 +99,7 @@ class ControlPanel extends JPanel implements ActionListener
       if (b == end)
       {
          if (player.getCanRoll()) JOptionPane.showMessageDialog(null,"You haven't finished rolling.","Keep rolling!", JOptionPane.ERROR_MESSAGE);
-         else player.endTurn();
+         else if (player.endTurn()) takeATurn(/*next player*/);
       }
    }
 }
