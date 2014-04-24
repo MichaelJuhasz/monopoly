@@ -3,12 +3,12 @@ import java.awt.*;
 
 class Go extends Corner
 {
-   private GoPanel goPanel;
+   private CornerPanel goPanel;
 
    public Go()
    {
       super(1,"GO");
-      goPanel = new GoPanel(this);
+      goPanel = new CornerPanel(this);
    }
 
    private void landedOn(Player p)

@@ -3,11 +3,11 @@ import java.awt.*;
 
 class Jail extends Corner
 {
-   private JailPanel jailPanel;
+   private CornerPanel jailPanel;
    public Jail()
    {
       super(11,"JAIL");
-      jailPanel = new JailPanel(this);
+      jailPanel = new CornerPanel(this);
    }
 
    public void landedOn()

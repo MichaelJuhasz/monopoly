@@ -3,11 +3,11 @@ import java.awt.*;
 
 class FreeParking extends Corner
 {
-   private ParkingPanel parkingPanel;
+   private CornerPanel parkingPanel;
    public FreeParking()
    {
       super(21,"FREE PARKING");
-      parkingPanel = new ParkingPanel(this);
+      parkingPanel = new CornerPanel(this);
    }
 
    private void updateGraphics()

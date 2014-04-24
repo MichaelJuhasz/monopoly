@@ -8,7 +8,7 @@ abstract class Property extends Tile
    public Player owner;
    public String name;
    public int number;
-   public ArrayList<Player> guests = new ArrayList<Player>();
+   // public ArrayList<Player> guests = new ArrayList<Player>();
 
    public Property(int num, int p, String n)
    {
@@ -61,8 +61,8 @@ abstract class Property extends Tile
       updateGraphics();
    }
 
-   private abstract void payRent(Player p);
+   abstract void payRent(Player p);
 
-   private abstract void updateGraphics();
+   abstract void updateGraphics();
 
 }

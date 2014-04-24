@@ -3,8 +3,12 @@ import javax.swing.JPanel;
 abstract class Tile 
 {
    public int number;
+   public String name;
+   public ArrayList<Player> guests = new ArrayList<Player>();
    
    abstract void landedOn(Player p);
+
+   abstract public void leave(Player p)
 
    public int getNumber()
    {

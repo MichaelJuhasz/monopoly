@@ -14,9 +14,9 @@ class Monopoly
       Color pink = new Color(230,0,176);
    	  Color orange = new Color(255,150,31);
    	  Color red = new Color (255,31,31);
-   	  Color yellow = new Color (255,236,31);
-   	  Color green = new Color(6,125,8);
-   	  Color darkBlue = new Color(6,48,125);
+     	Color yellow = new Color (255,236,31);
+     	Color green = new Color(6,125,8);
+     	Color darkBlue = new Color(6,48,125);
 
       // Bottom of the board
       tileList.add(new Go());
@@ -187,50 +187,51 @@ class Monopoly
       JPanel gameBoard = setUpBoard();
       gameWindow.add(gameBoard, BorderLayout.CENTER);
       
-      ControlPanel controlPanel = new ControlPanel();
-      gameWindow.add(controlPanel, BorderLayout.EAST);
-      
       gameWindow.setVisible(true);
       gameWindow.setSize(850,650);
       gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-      int playerNum = JOptionPane.showInputDialog(
+      String input = JOptionPane.showInputDialog(
                          null,
                          "How many people are playing?",
                          "Get ready to Monopolize",
-                         JOptionPane.PLAIN_MESSAGE,
-                         null
+                         JOptionPane.PLAIN_MESSAGE
                       );
+      int playerNum = Integer.parseInt(input);
 
       // Player[] players = new Player[playerNum];
       CircularLinkedList players = new CircularLinkedList();
 
       for (int i = 1; i <= playerNum; i++)
       {
-         String p = (String)JOptionPane.showInputDialog(
-                               null,
-                               "What's player "+i+"'s name?",
-                               "Get ready to Monopolize",
-                               JOptionPane.QUESTION_MESSAGE,
-                               null
-                            );
+         String p = JOptionPane.showInputDialog(
+                        null,
+                        "What's player "+i+"'s name?",
+                        "Get ready to Monopolize",
+                        JOptionPane.QUESTION_MESSAGE
+                      );
+
          // icon stuff
          String [] choices = {"Cannon", "Dog", "Hat", "Horse", "Iron", "Ship", "Thimbal", "Wheelbarrow"};
          String iconChoice = (String)JOptionPane.showOptionDialog(
                                    null, 
                                    "Which token does player "+i+" want?",
                                    "Get ready to Monopolize", 
+                                   JOptionPane.DEFAULT_OPTION,
                                    JOptionPane.QUESTION_MESSAGE,
                                    null,
                                    choices,
                                    choices[0]
                                 );
-         
+
          ImageIcon icon = new ImageIcon("images/"+iconChoice+".png");
 
          Player pl = new Player(p, icon);
          
          players.add(pl);
       }
+
+      ControlPanel controlPanel = new ControlPanel(players);
+      gameWindow.add(controlPanel, BorderLayout.EAST);
    }
 }

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 abstract class Corner extends Tile
 {
-   public String name;
-   public int number;
-   private ArrayList<Player> guests = new ArrayList<Player>();
+   // public String name;
+   // public int number;
+   // protected ArrayList<Player> guests = new ArrayList<Player>();
 
    public Corner (int num, String n)
    {

@@ -11,6 +11,7 @@ class ControlPanel extends JPanel implements ActionListener
    private JButton end = new JButton ("End Turn");
    private Player player;
    private CircularLinkedList players;
+   private Node playerNode;
 
    public ControlPanel(CircularLinkedList ps)
    {
@@ -57,18 +58,6 @@ class ControlPanel extends JPanel implements ActionListener
       players = ps;
    }
 
-   public void run()
-   {
-      Node playerNode = players.getNodeAt(0)
-      takeATurn(playerNode.getData());
-
-      while()
-      {
-         playerNode = players.getNext(playerNode);
-         takeATurn(playerNode.getData());
-      }
-   }
-
    public void takeATurn(Player p)
    {
       player = p;
@@ -92,14 +81,18 @@ class ControlPanel extends JPanel implements ActionListener
 
       if (b == fine)
       {
-         if (player.getPayFine()) player.getOutOfJail();
+         if (player.getCanPayFine()) player.getOutOfJail();
          else JOptionPane.showMessageDialog(null,"You're not in jail.","No fines to pay!", JOptionPane.ERROR_MESSAGE);
       }
 
       if (b == end)
       {
          if (player.getCanRoll()) JOptionPane.showMessageDialog(null,"You haven't finished rolling.","Keep rolling!", JOptionPane.ERROR_MESSAGE);
-         else if (player.endTurn()) takeATurn(/*next player*/);
+         else if (player.endTurn())
+         {
+            playerNode = players.getNext(playerNode);
+            takeATurn((Player)playerNode.getData());
+         } 
       }
    }
 }

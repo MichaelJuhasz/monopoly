@@ -15,11 +15,18 @@ class RailRoad extends Property
       //price = 200;
    }
 
-   private void payRent()
+   public void payRent(Player p)
    {
       int toll;
-      int rails;
-      // rails = number of railroads owned by this.owner
+      int rails = 0;
+      ArrayList<Property> properties = owner.getDeeds;
+
+      for (int i = 0; i < properties.size(); i++)
+      {
+         Property prop = properties.get(i);
+         if (prop instanceof RailRoad) rails++;
+      }
+
       toll = (int) (25 * Math.pow(2, rails - 1));
       p.payment(-toll);
       owner.payment(toll);

@@ -11,13 +11,14 @@ class Player
    private int nonCashAssets = 0;
    public ArrayList<Property> deeds = new ArrayList<Property>();
    public String name;
-   public Tile currentTile = tileList.get(0);
+   public Tile currentTile;
    private ImageIcon token;
 
    public Player(String n, ImageIcon icon)
    {
       name = n;
       token = icon;
+      currentTile = Monopoly.tileList.get(0)
    } 
 
    // This method will control the graphics (populating the sidebar with 
@@ -88,7 +89,7 @@ class Player
 
       currentTile.leave(this);
 
-      Tile destinationTile = tileList.get(space);
+      Tile destinationTile = Monopoly.tileList.get(space);
       destinationTile.landedOn(this);
 
       currentTile = destinationTile;
@@ -104,7 +105,7 @@ class Player
 
       currentTile.leave(this);
 
-      Tile destinationTile = tileList.get(destination);
+      Tile destinationTile = Monopoly.tileList.get(destination);
       destinationTile.landedOn(this);
 
       currentTile = destinationTile;
@@ -180,20 +181,23 @@ class Player
          Object [] names = new String[deeds.size()];
          for (int i = 0; i < deeds.size(); i++)
          {
-            names[i] = deeds.get(i).name;
+            Property prop = deeds.get(i)
+            if (prop instanceof Street) names[i] = prop.name;
          }
 
-         Object result = JOptionPane.showInputDialog(null, 
+         int result = JOptionPane.showOptionDialog(null, 
          	                        "Which property do you want to upgrade?",
          	                        "Property Upgrade",
+                                    JOptionPane.DEFAULT_OPTION,
          	                        JOptionPane.QUESTION_MESSAGE,
          	                        null, 
          	                        names,
          	                        names[0]
          	                     );
-         if (result instanceof Integer) {        	 
-            deeds.get(((Integer) result).intValue()).upgrade(this);
-         }
+         // if (result instanceof Integer) 
+         // {        	 
+         deeds.get(result).upgrade(this);
+         // }
       }
    }
 

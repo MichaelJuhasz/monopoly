@@ -53,7 +53,7 @@ class Street extends Property
 	  }
    }
 
-   private void payRent(Player p)
+   public void payRent(Player p)
    {
    	  int toll = 0;
       if (!monopoly) toll = rent;
@@ -93,6 +93,9 @@ class Street extends Property
       } 
    }
 
+   // You can only upgrade a tile if you have a monopoly on that group
+   // and you must upgrade all properties equally - i.e. a property cannot
+   // be upgraded if it has more houses than any other property in the group
    public void upgrade(Player p)
    {
       if (houses >= 5) JOptionPane.showMessageDialog(null, name+" is already fully upgraded.", "Cannot Upgrade.", JOptionPane.ERROR_MESSAGE);
@@ -101,22 +104,30 @@ class Street extends Property
       {
 	      if (monopoly)
 	      {
-	         if((group.size() == 2 && Math.abs(group.get(0).houses - group.get(1).houses) > 1) || 
-	         	(group.size() == 3 && Math.abs(group.get(0).houses - group.get(1).houses) > 1 || 
-	         	                      Math.abs(group.get(1).houses - group.get(2).houses) > 1 ||
-	         	                      Math.abs(group.get(0).houses - group.get(2).houses > 1)))
-	         {
-	            JOptionPane.showMessageDialog(null, "Properties must be upgraded equally.", "Cannot Upgrade.", JOptionPane.ERROR_MESSAGE);
-	         }
-	         else if (p.getFunds() >= bldgCost) 
-	         {
-	            JOptionPane.showMessageDialog(null, name+" upgraded!", "Success!", JOptionPane.INFORMATION_MESSAGE);
-	            houses++;
-	            p.payment(bldgCost * -1);   
-	         }
+            int i = group.indexOf(this);
+            boolean upgradable = true;
 
-	         else if (p.getFunds() < bldgCost) JOptionPane.showMessageDialog(null,"Not enough funds!","Not enough funds!", JOptionPane.ERROR_MESSAGE);
-	      }
+            for (Property prop : group)
+            {
+               if (prop.houses < this.houses)
+               {
+                  upgradable = false;
+                  JOptionPane.showMessageDialog(null, "Properties must be upgraded equally.", "Cannot Upgrade.", JOptionPane.ERROR_MESSAGE);
+               }  
+            }
+
+	         if (upgradable)
+            {
+               if (p.getFunds() >= bldgCost) 
+	            {
+	               JOptionPane.showMessageDialog(null, name+" upgraded!", "Success!", JOptionPane.INFORMATION_MESSAGE);
+	               houses++;
+	               p.payment(bldgCost * -1);   
+	            }
+
+	            else JOptionPane.showMessageDialog(null,"Not enough funds!","Not enough funds!", JOptionPane.ERROR_MESSAGE);
+	         }
+         }
 
 	      else JOptionPane.showMessageDialog(null, "You must own all properties of this color before any can be upgraded.", "Cannot Upgrade.", JOptionPane.ERROR_MESSAGE);
       }
