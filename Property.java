@@ -6,8 +6,8 @@ abstract class Property extends Tile
 {
    private int price;
    public Player owner;
-   public String name;
-   public int number;
+//   public String name;
+//   public int number;
    // public ArrayList<Player> guests = new ArrayList<Player>();
 
    public Property(int num, int p, String n)

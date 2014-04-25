@@ -20,7 +20,7 @@ class Monopoly
 
       // Bottom of the board
       tileList.add(new Go());
-      Street tile2 = new Street(2,2,10,30,90,160,250,60,50,"MEDDITERRANEAN AVENUE",purple);
+      Street tile2 = new Street(2,2,10,30,90,160,250,60,50,"MEDDITERRANEAN AVENUE", purple);
       tileList.add(tile2);
       tileList.add(new CardTile("COMMUNITY CHEST",3));
       Street tile4 = new Street(4,4,20,60,180,320,450,60,50,"BALTIC AVENUE", purple);
@@ -133,45 +133,52 @@ class Monopoly
       JPanel south = new JPanel();
       south.setLayout(new BoxLayout(south, BoxLayout.LINE_AXIS));
       south.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+      south.setPreferredSize(new Dimension(650,100));
       
       // west needs to be loaded backwards, with the largest element loaded first
       JPanel west = new JPanel();
       west.setLayout(new BoxLayout(west, BoxLayout.PAGE_AXIS));
+      west.setPreferredSize(new Dimension(100,450));
 
       JPanel north = new JPanel();
       north.setLayout(new BoxLayout(north, BoxLayout.LINE_AXIS));
+      north.setPreferredSize(new Dimension(650,100));
 
       JPanel east = new JPanel();
       east.setLayout(new BoxLayout(east, BoxLayout.PAGE_AXIS));
+      east.setPreferredSize(new Dimension(100,450));
 
       // Because we'll be using BorderLayout from the gameboard panel, 
       // and because of how regions overlap in BorderLayout, the south 
       // and north panels must contain all the corners.
 
       // This should be "GO" through "JAIL"
-      for (int i = 0; i < 4; i++)
+      for (int i = 0; i < 11; i++)
       {
          south.add(tileList.get(i).getPanel());
       }
 
-      // for (int i = 19; i >= 11; i--)
-      // {
-      //    west.add(tileList.get(i).getPanel());
-      // }
+      for (int i = 19; i >= 11; i--)
+       {
+          west.add(tileList.get(i).getPanel());
+       }
 
-      // for (int i = 20; i < 31; i++)
-      // {
-      //    north.add(tileList.get(i).getPanel());
-      // }
+       for (int i = 20; i < 31; i++)
+       {
+          north.add(tileList.get(i).getPanel());
+       }
 
-      // for (int i = 31; i < 40; i++)
-      // {
-      //    east.add(tileList.get(i).getPanel());
-      // }
+       for (int i = 31; i < 40; i++)
+       {
+          east.add(tileList.get(i).getPanel());
+       }
+       
+       JLabel monoLabel = new JLabel("Monopoly");
 
       // Make the game board JPanel and load it with these guys
       JPanel gameBoard = new JPanel(new BorderLayout());
 
+      gameBoard.add(monoLabel, BorderLayout.CENTER);
       gameBoard.add(south, BorderLayout.SOUTH);
       gameBoard.add(west, BorderLayout.WEST);
       gameBoard.add(north, BorderLayout.NORTH);

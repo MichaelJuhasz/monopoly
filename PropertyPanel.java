@@ -12,9 +12,10 @@ class PropertyPanel extends JPanel
    public PropertyPanel(Tile u)
    {
       name = u.name;
-      width = 50;
+ //     width = 50;
+      width = 100;
       height = 100;
-      angle = (u.getNumber() / 10) * 90;
+      angle = ((u.getNumber()-1) / 10) * 90;
 
       /*
       // Center the text (maybe) from: http://stackoverflow.com/questions/3213045/centering-text-in-a-jtextarea-or-jtextpane-horizontal-text-alignment
@@ -37,6 +38,9 @@ class PropertyPanel extends JPanel
       g.setRenderingHint ( RenderingHints.KEY_ANTIALIASING,
                            RenderingHints.VALUE_ANTIALIAS_ON);
       
+      if (angle == 90) g.translate(height, 0);
+      else if (angle == 180) g.translate(width, height);
+      else if (angle == 270) g.translate(0, width);
       // Rotate tile accorinding to position on the board (i.e. its number)
       g.rotate(Math.toRadians(angle));
 
@@ -46,7 +50,7 @@ class PropertyPanel extends JPanel
       g.drawRect(0,0,width,height);
 
       // Write name of tile
-      g.drawString(name,width/2,height+20);
+      g.drawString(name,width/2, height/4+20);
 
       // Draw any player tokens that are sitting on this tile
       if (!guests.isEmpty())
