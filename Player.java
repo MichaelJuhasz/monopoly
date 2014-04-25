@@ -18,7 +18,7 @@ class Player
    {
       name = n;
       token = icon;
-      currentTile = Monopoly.tileList.get(0)
+      currentTile = Monopoly.tileList.get(0);
    } 
 
    // This method will control the graphics (populating the sidebar with 
@@ -181,7 +181,7 @@ class Player
          Object [] names = new String[deeds.size()];
          for (int i = 0; i < deeds.size(); i++)
          {
-            Property prop = deeds.get(i)
+            Property prop = deeds.get(i);
             if (prop instanceof Street) names[i] = prop.name;
          }
 
@@ -196,7 +196,8 @@ class Player
          	                     );
          // if (result instanceof Integer) 
          // {        	 
-         deeds.get(result).upgrade(this);
+         Street choice = (Street)deeds.get(result);
+         choice.upgradeStreet(this);
          // }
       }
    }

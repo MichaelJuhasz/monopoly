@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 class TaxTile extends Tile
 {
@@ -12,7 +13,6 @@ class TaxTile extends Tile
    private String name; 
    private int number;
    private PropertyPanel taxPanel;
-   private ArrayList<Player> guests = new ArrayList<Player>();
 
    public TaxTile(int num, String n, TaxType tt)
    {
@@ -22,17 +22,18 @@ class TaxTile extends Tile
       taxPanel = new PropertyPanel(this);
    }
 
-   private void landedOn(Player p)
+   public void landedOn(Player p)
    {
       guests.add(p);
       updateGraphics();
 
-      if (type == LUXURY)
+      if (type == TaxType.LUXURY)
       {
          p.payment(-75);
       }
       else 
       {
+        String [] choices = {"10%", "$200"};
 	     int response = JOptionPane.showOptionDialog(
 		               null,
 		               "Pay 10% or $200",
@@ -40,17 +41,17 @@ class TaxTile extends Tile
 		               JOptionPane.YES_NO_OPTION,
 		               JOptionPane.PLAIN_MESSAGE,
 		               null,
-		               {"10%", "$200"},
-		               "10%"
+		               choices,
+		               choices[0]
 		            );
          if (response == 1) p.payment(-200);
          else 
          {
          	int worth = p.getTotalWorth();
-         	int tax = worth * 0.1;
+         	int tax = (int)(worth * 0.1);
          	p.payment(tax * -1);
-         	if (tax <= 200) JOptionPane.showMessageDialog("Your total worth was $"+worth+" and you paid $"+tax+".\nGood move.", JOptionPane.INFORMATION_MESSAGE);
-            else JOptionPane.showMessageDialog("Your total worth was $"+worth+" and you paid $"+tax=".\nPoor choice.", JOptionPane.INFORMATION_MESSAGE);    
+         	if (tax <= 200) JOptionPane.showMessageDialog(null, "Your total worth was $"+worth+" and you paid $"+tax+".\nGood move.", "Income Tax", JOptionPane.INFORMATION_MESSAGE);
+            else JOptionPane.showMessageDialog(null, "Your total worth was $"+worth+" and you paid $"+tax+".\nPoor choice.", "Income Tax", JOptionPane.INFORMATION_MESSAGE);    
          }
       }
    }

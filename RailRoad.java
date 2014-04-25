@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 class RailRoad extends Property
 {
@@ -13,13 +14,14 @@ class RailRoad extends Property
       super(num, 200, n);
       //name = n;
       //price = 200;
+      railRoadPanel = new PropertyPanel(this);
    }
 
    public void payRent(Player p)
    {
       int toll;
       int rails = 0;
-      ArrayList<Property> properties = owner.getDeeds;
+      ArrayList<Property> properties = owner.getDeeds();
 
       for (int i = 0; i < properties.size(); i++)
       {
@@ -32,7 +34,7 @@ class RailRoad extends Property
       owner.payment(toll);
    }
 
-   private void updateGraphics()
+   public void updateGraphics()
    {
       railRoadPanel.update(guests);
    }

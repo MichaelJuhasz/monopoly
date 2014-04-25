@@ -4,12 +4,14 @@ import java.awt.*;
 class GoToJail extends Corner
 {
    private CornerPanel goToJailPanel;
+   
    public GoToJail()
    {
       super(31,"GO TO JAIL");
-      goToJailPanel = new CornerPanel();
+      goToJailPanel = new CornerPanel(this);
    }
-   private void landedOn(Player p)
+   
+   public void landedOn(Player p)
    {
       guests.add(p);
       updateGraphics();
@@ -17,8 +19,13 @@ class GoToJail extends Corner
       p.goToJail();
    }
 
-   private void updateGraphics()
+   public void updateGraphics()
    {
       goToJailPanel.update(guests);
+   }
+
+   public JPanel getPanel()
+   {
+      return goToJailPanel;
    }
 }

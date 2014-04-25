@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 class StreetPanel extends JPanel
 {
-   private String name;
+   public String name;
    private Color color;
    private Street street;
    private int width, height, angle, houses;

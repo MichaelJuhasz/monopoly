@@ -147,27 +147,27 @@ class Monopoly
       // Because we'll be using BorderLayout from the gameboard panel, 
       // and because of how regions overlap in BorderLayout, the south 
       // and north panels must contain all the corners.
-      
+
       // This should be "GO" through "JAIL"
-      for (int i = 0; i < 11; i++)
+      for (int i = 0; i < 4; i++)
       {
          south.add(tileList.get(i).getPanel());
       }
 
-      for (int i = 19; i >= 11; i--)
-      {
-         west.add(tileList.get(i).getPanel());
-      }
+      // for (int i = 19; i >= 11; i--)
+      // {
+      //    west.add(tileList.get(i).getPanel());
+      // }
 
-      for (int i = 20; i < 31; i++)
-      {
-         north.add(tileList.get(i).getPanel());
-      }
+      // for (int i = 20; i < 31; i++)
+      // {
+      //    north.add(tileList.get(i).getPanel());
+      // }
 
-      for (int i = 31; i < 40; i++)
-      {
-         east.add(tileList.get(i).getPanel());
-      }
+      // for (int i = 31; i < 40; i++)
+      // {
+      //    east.add(tileList.get(i).getPanel());
+      // }
 
       // Make the game board JPanel and load it with these guys
       JPanel gameBoard = new JPanel(new BorderLayout());
@@ -213,7 +213,7 @@ class Monopoly
 
          // icon stuff
          String [] choices = {"Cannon", "Dog", "Hat", "Horse", "Iron", "Ship", "Thimbal", "Wheelbarrow"};
-         String iconChoice = (String)JOptionPane.showOptionDialog(
+         int iconChoice = JOptionPane.showOptionDialog(
                                    null, 
                                    "Which token does player "+i+" want?",
                                    "Get ready to Monopolize", 
@@ -224,7 +224,7 @@ class Monopoly
                                    choices[0]
                                 );
 
-         ImageIcon icon = new ImageIcon("images/"+iconChoice+".png");
+         ImageIcon icon = new ImageIcon("images/"+choices[iconChoice]+".png");
 
          Player pl = new Player(p, icon);
          

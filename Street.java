@@ -96,7 +96,7 @@ class Street extends Property
    // You can only upgrade a tile if you have a monopoly on that group
    // and you must upgrade all properties equally - i.e. a property cannot
    // be upgraded if it has more houses than any other property in the group
-   public void upgrade(Player p)
+   public void upgradeStreet(Player p)
    {
       if (houses >= 5) JOptionPane.showMessageDialog(null, name+" is already fully upgraded.", "Cannot Upgrade.", JOptionPane.ERROR_MESSAGE);
       
@@ -107,7 +107,7 @@ class Street extends Property
             int i = group.indexOf(this);
             boolean upgradable = true;
 
-            for (Property prop : group)
+            for (Street prop : group)
             {
                if (prop.houses < this.houses)
                {
@@ -133,7 +133,7 @@ class Street extends Property
       }
    }
 
-   private void updateGraphics()
+   public void updateGraphics()
    {
       streetpanel.update(guests, houses);
    }

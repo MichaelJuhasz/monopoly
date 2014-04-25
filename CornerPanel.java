@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 class CornerPanel extends JPanel
 {
-   private int width, height;
+   private int width, height, angle;
+   public String name;
    private ArrayList<Player> guests = new ArrayList<Player>();
    //private ArrayList<BufferedImage> tokens = new ArrayList<BufferedImage>();
 

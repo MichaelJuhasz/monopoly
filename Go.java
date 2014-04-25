@@ -11,7 +11,7 @@ class Go extends Corner
       goPanel = new CornerPanel(this);
    }
 
-   private void landedOn(Player p)
+   public void landedOn(Player p)
    {
       p.payment(200);
       guests.add(p);
@@ -21,5 +21,10 @@ class Go extends Corner
    private void updateGraphics()
    {
       goPanel.update(guests);
+   }
+
+   public JPanel getPanel()
+   {
+      return goPanel;
    }
 }

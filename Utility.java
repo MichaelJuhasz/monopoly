@@ -14,7 +14,7 @@ class Utility extends Property
       utilityPanel = new PropertyPanel(this);
    }
 
-   private void payRent(Player p)
+   public void payRent(Player p)
    {
    	int toll;
       if (owner.getDeeds().contains("Electric Company") &&
@@ -29,7 +29,7 @@ class Utility extends Property
       owner.payment(toll);
    }
 
-   private void updateGraphics()
+   public void updateGraphics()
    {
       utilityPanel.update(guests);
    }
