@@ -14,7 +14,7 @@ class CornerPanel extends JPanel
       width = 100;
       height = 100;
       name = c.name;
-      angle = (c.getNumber() / 10) * 90;
+      angle = ((c.getNumber() - 1)/ 10) * 90;
 
    }
 
@@ -30,6 +30,10 @@ class CornerPanel extends JPanel
       g.setRenderingHint ( RenderingHints.KEY_ANTIALIASING,
                            RenderingHints.VALUE_ANTIALIAS_ON);
 
+      
+      if (angle == 90) g.translate(height, 0);
+      else if (angle == 180) g.translate(width, height);
+      else if (angle == 270) g.translate(0, width);
       g.rotate(Math.toRadians(angle));
 
       // Draw border around tile
@@ -38,7 +42,7 @@ class CornerPanel extends JPanel
       g.drawRect(0,0,width,height);
 
       // Write name of tile
-      g.drawString(name, width/2,height+20);
+      g.drawString(name, width/2, height/4+20);
 
       // Draw any player tokens that are sitting on this tile
       if (!guests.isEmpty())

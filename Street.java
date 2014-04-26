@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 class Street extends Property
 {
-   private int number, rent, oneHs, twoHs, threeHs, fourHs, hotel, price, bldgCost, houses;
+   private int rent, oneHs, twoHs, threeHs, fourHs, hotel, bldgCost, houses;
    public Player owner;
-   public String name;
+   // public String name;
    public Color color;
    private ArrayList<Street> group = new ArrayList<Street>();
    private boolean monopoly = false;
@@ -18,8 +18,6 @@ class Street extends Property
    {
    	super(num, p, n);
 
-      streetpanel = new StreetPanel(this);
-
       rent = r;
       oneHs = one;
       twoHs = two;
@@ -30,8 +28,8 @@ class Street extends Property
       bldgCost = bldgC;
       //name = n;
       color = c;
-
       houses = 0;
+      streetpanel = new StreetPanel(this);
    }
 
    public void setGroup(Street s1, Street s2, Street s3)

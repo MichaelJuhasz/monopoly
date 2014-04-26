@@ -10,8 +10,8 @@ class TaxTile extends Tile
    }
 
    private TaxType type;
-   private String name; 
-   private int number;
+   //private String name; 
+   //private int number;
    private PropertyPanel taxPanel;
 
    public TaxTile(int num, String n, TaxType tt)

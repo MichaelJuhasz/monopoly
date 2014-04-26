@@ -46,7 +46,7 @@ class PropertyPanel extends JPanel
       g.drawRect(0,0,width,height);
 
       // Write name of tile
-      g.drawString(name,width/2,height+20);
+      g.drawString(name,width/2,height/4+20);
 
       // Draw any player tokens that are sitting on this tile
       if (!guests.isEmpty())

@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -45,6 +44,10 @@ class StreetPanel extends JPanel
       g.setRenderingHint ( RenderingHints.KEY_ANTIALIASING,
                            RenderingHints.VALUE_ANTIALIAS_ON);
       
+      if (angle == 90) g.translate(height, 0);
+      else if (angle == 180) g.translate(width, height);
+      else if (angle == 270) g.translate(0, width);      
+
       // Rotate tile accorinding to position on the board (i.e. its number)
       g.rotate(Math.toRadians(angle));
 
@@ -55,11 +58,11 @@ class StreetPanel extends JPanel
       // Draw border around tile
       g.setColor(Color.BLACK);
       g.setStroke(new BasicStroke(3));
-      g.drawRect(0,0,width,height);
-      g.drawLine(0,height/4,width,height/4);
+      g.drawRect(0, 0, width, height);
+      g.drawLine(0, height/4, width, height/4);
 
       // Write name of tile
-      g.drawString(name,width/2,height+20);
+      g.drawString(name, width/2, height/4 + 20);
 
       // Draw houses or hotel
       g.setStroke(new BasicStroke(1));
