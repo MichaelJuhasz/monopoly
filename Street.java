@@ -5,7 +5,7 @@ import java.util.ArrayList;
 class Street extends Property
 {
    private int number, rent, oneHs, twoHs, threeHs, fourHs, hotel, price, bldgCost, houses;
-   public Player owner;
+  // public Player owner;
  // public String name;
    public Color color;
    private ArrayList<Street> group = new ArrayList<Street>();
@@ -34,21 +34,21 @@ class Street extends Property
 
    public void setGroup(Street s1, Street s2, Street s3)
    {
-if (group.isEmpty())
-{
+      if (group.isEmpty())
+      {
          group.add(s1);
          group.add(s2);
          group.add(s3);
-}
+      }
    }
 
    public void setGroup(Street s1, Street s2)
    {
-if (group.isEmpty())
-{
+      if (group.isEmpty())
+      {
          group.add(s1);
          group.add(s2);
-}
+      }
    }
 
    public void payRent(Player p)
@@ -74,6 +74,7 @@ if (group.isEmpty())
          }
 
       }
+      JOptionPane.showMessageDialog(null, "You must pay $"+toll+" to "+owner.getName(), "Pay Rent.", JOptionPane.ERROR_MESSAGE);
       p.payment(-toll);
       owner.payment(toll);
    }

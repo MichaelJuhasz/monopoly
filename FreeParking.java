@@ -10,7 +10,7 @@ class FreeParking extends Corner
       parkingPanel = new CornerPanel(this);
    }
 
-   private void updateGraphics()
+   public void updateGraphics()
    {
       parkingPanel.update(guests);
    }

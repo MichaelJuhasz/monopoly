@@ -198,40 +198,83 @@ class Monopoly
       gameWindow.setSize(850,650);
       gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-      String input = JOptionPane.showInputDialog(
-                         null,
-                         "How many people are playing?",
-                         "Get ready to Monopolize",
-                         JOptionPane.PLAIN_MESSAGE
-                      );
+      // Set up a custom input dialog
+      String [] options = {"OK"};
+      JPanel panel1 = new JPanel();
+      JLabel lbl1 = new JLabel("How many people are playing?");
+      JTextField txt = new JTextField(10);
+      panel1.add(lbl1);
+      panel1.add(txt);
+
+      String input = null;
+      while (input == null)
+      {
+         int selectedOption = JOptionPane.showOptionDialog(
+                                      null, 
+                                      panel1, 
+                                      "Get ready to Monopolize", 
+                                      JOptionPane.NO_OPTION, 
+                                      JOptionPane.QUESTION_MESSAGE, 
+                                      null, 
+                                      options, 
+                                      options[0]
+                                    );
+            if(selectedOption == 0)
+            {
+               input = txt.getText();
+            } 
+      }
+
       int playerNum = Integer.parseInt(input);
 
-      // Player[] players = new Player[playerNum];
+      // Create a CircularLinkedList of Players to be 
+      // populated in the following for loop
       CircularLinkedList players = new CircularLinkedList();
+
+      // Set up another custom input dialog
+      JPanel panel2 = new JPanel();
+      JLabel lbl2 = new JLabel("What's this player's name?");
+      panel2.add(lbl2);
+      panel2.add(txt);
 
       for (int i = 1; i <= playerNum; i++)
       {
-         String p = JOptionPane.showInputDialog(
-                        null,
-                        "What's player "+i+"'s name?",
-                        "Get ready to Monopolize",
-                        JOptionPane.QUESTION_MESSAGE
-                      );
+         String p = null;
+         while (p == null)
+         {
+            int selected = JOptionPane.showOptionDialog(
+                                       null, 
+                                      panel2, 
+                                      "Get ready to Monopolize", 
+                                      JOptionPane.NO_OPTION, 
+                                      JOptionPane.QUESTION_MESSAGE, 
+                                      null, 
+                                      options , 
+                                      options[0]
+                                    );
+            if(selected == 0)
+            {
+               p = txt.getText();
+            } 
+         }
 
          // icon stuff
          String [] choices = {"Cannon", "Dog", "Hat", "Horse", "Iron", "Ship", "Thimbal", "Wheelbarrow"};
-         int iconChoice = JOptionPane.showOptionDialog(
+         String iconChoice = null;
+         while (iconChoice == null)
+         {
+            iconChoice = (String)JOptionPane.showInputDialog(
                                    null,
                                    "Which token does player "+i+" want?",
                                    "Get ready to Monopolize",
-                                   JOptionPane.DEFAULT_OPTION,
+                                   //JOptionPane.DEFAULT_OPTION,
                                    JOptionPane.QUESTION_MESSAGE,
                                    null,
                                    choices,
                                    choices[0]
                                 );
-
-         ImageIcon icon = new ImageIcon("images/"+choices[iconChoice]+".png");
+         }
+         ImageIcon icon = new ImageIcon("images/"+iconChoice+".png");
 
          Player pl = new Player(p, icon);
          
@@ -240,5 +283,11 @@ class Monopoly
 
       ControlPanel controlPanel = new ControlPanel(players);
       gameWindow.add(controlPanel, BorderLayout.EAST);
+
+      System.out.println(players.getSize());
+      System.out.println(players.getNodeAt(1));
+      System.out.println(players.getNext(players.getNodeAt(0)).getData());
+
+      controlPanel.takeATurn((Player)players.getNodeAt(0).getData());
    }
 }

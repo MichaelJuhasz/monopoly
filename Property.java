@@ -27,7 +27,7 @@ abstract class Property extends Tile
      Object [] options = {"Buy", "Pass"};
          int response = JOptionPane.showOptionDialog(
           null,
-          "Do you want to buy "+name+" for "+price+"?",
+          "Do you want to buy "+name+" for $"+price+"?",
           name,
           JOptionPane.YES_NO_OPTION,
           JOptionPane.PLAIN_MESSAGE,

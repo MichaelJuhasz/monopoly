@@ -35,7 +35,7 @@ doc.setParagraphAttributes(0, doc.getLength(), center, false);
    {
       houses = h;
       guests = g;
-
+      super.repaint();
    }
 
    public void paintComponent (Graphics g2)
@@ -52,9 +52,14 @@ doc.setParagraphAttributes(0, doc.getLength(), center, false);
       // Rotate tile accorinding to position on the board (i.e. its number)
       g.rotate(Math.toRadians(angle));
 
+      // Draw white box
+      g.setColor(Color.WHITE);
+      g.fillRect(0, 0, width, height);
+
       // Draw colored box
       g.setColor(color);
       g.fillRect(0,0,width,height/4);
+
 
       // Draw border around tile
       g.setColor(Color.BLACK);

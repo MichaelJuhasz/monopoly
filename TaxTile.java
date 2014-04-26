@@ -30,20 +30,21 @@ class TaxTile extends Tile
       if (type == TaxType.LUXURY)
       {
          p.payment(-75);
+         JOptionPane.showMessageDialog(null, "You must pay a luxury tax of $75", "Luxury Tax", JOptionPane.ERROR_MESSAGE);
       }
       else
       {
         String [] choices = {"10%", "$200"};
-int response = JOptionPane.showOptionDialog(
-null,
-"Pay 10% or $200",
-"Income Tax",
-JOptionPane.YES_NO_OPTION,
-JOptionPane.PLAIN_MESSAGE,
-null,
-choices,
-choices[0]
-);
+        int response = JOptionPane.showOptionDialog(
+                                     null,
+                                     "Pay 10% or $200",
+                                     "Income Tax",
+                                     JOptionPane.YES_NO_OPTION,
+                                     JOptionPane.PLAIN_MESSAGE,
+                                     null,
+                                     choices,
+                                     choices[0]
+                       );
          if (response == 1) p.payment(-200);
          else
          {

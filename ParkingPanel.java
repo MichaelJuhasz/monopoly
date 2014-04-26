@@ -29,6 +29,9 @@ class ParkingPanel extends JPanel
 
       g.rotate(Math.toRadians(180));
       
+      g.setColor(Color.WHITE);
+      g.fillRect(0,0,width,height);
+
       // Draw border around tile
       g.setColor(Color.BLACK);
       g.setStroke(new BasicStroke(3));

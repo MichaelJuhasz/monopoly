@@ -56,6 +56,7 @@ class ControlPanel extends JPanel implements ActionListener
       add(end, endC);
 
       players = ps;
+      playerNode = players.getNodeAt(0);
    }
 
    public void takeATurn(Player p)

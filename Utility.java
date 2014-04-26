@@ -3,7 +3,7 @@ import java.awt.*;
 
 class Utility extends Property
 {
-   public Player owner;
+   // public Player owner;
 // public String name;
    private int price;
    private PropertyPanel utilityPanel;

@@ -26,6 +26,5 @@ abstract class Corner extends Tile
 	   updateGraphics();
    }
 
-   private void updateGraphics()
-   {}
+   abstract void updateGraphics();
 }

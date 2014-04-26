@@ -1,5 +1,5 @@
 
-import java.util.ArrayList;
+import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,7 +7,7 @@ class Player
 {
    private boolean myTurn, canRoll, canUpgrade, canPayFine, inJail;
    private int doubles, rollResult;
-   private int funds = 0;
+   private int funds;
    private int nonCashAssets = 0;
    public ArrayList<Property> deeds = new ArrayList<Property>();
    public String name;
@@ -19,6 +19,7 @@ class Player
       name = n;
       token = icon;
       currentTile = Monopoly.tileList.get(0);
+      funds = 1500;
    } 
 
    // This method will control the graphics (populating the sidebar with 
@@ -65,9 +66,10 @@ class Player
    {
       if(canRoll && !inJail)
       {
+         canRoll = false;
          rollResult = Dice.getInstance().roll(this);
-         if (doubles == 0 || doubles >= 3) canRoll = false;
-         move(rollResult);
+         //if (doubles == 0 || doubles >= 3) canRoll = false;
+         if (!inJail) move(rollResult);
       }
       else if (canRoll && inJail)
       {
@@ -79,7 +81,8 @@ class Player
    // specific destination Tile.
    public void move(int n)
    {
-      int space = currentTile.getNumber() + n;
+
+      int space = currentTile.getNumber() + (n - 1);
 
       if (space > 40)
       {
@@ -88,6 +91,7 @@ class Player
       } 
 
       currentTile.leave(this);
+      System.out.println("leaving "+currentTile.name);
 
       Tile destinationTile = Monopoly.tileList.get(space);
       destinationTile.landedOn(this);
@@ -113,7 +117,10 @@ class Player
 
    public void doubleRoll()
    {
+      canRoll = true;
       doubles++;
+
+      System.out.println(doubles);
 
       if (inJail) 
       {
@@ -126,6 +133,7 @@ class Player
 
    public void goToJail()
    {
+      canRoll = false;
       inJail = true;
       move(10, true);
    }
@@ -185,20 +193,21 @@ class Player
             if (prop instanceof Street) names[i] = prop.name;
          }
 
-         int result = JOptionPane.showOptionDialog(null, 
+         String s = (String)JOptionPane.showInputDialog(null, 
          	                        "Which property do you want to upgrade?",
          	                        "Property Upgrade",
-                                    JOptionPane.DEFAULT_OPTION,
+                                    //JOptionPane.DEFAULT_OPTION,
          	                        JOptionPane.QUESTION_MESSAGE,
          	                        null, 
          	                        names,
          	                        names[0]
          	                     );
-         // if (result instanceof Integer) 
-         // {        	 
-         Street choice = (Street)deeds.get(result);
-         choice.upgradeStreet(this);
-         // }
+         if (s != null) 
+         {
+            int result = Arrays.asList(names).indexOf(s);     	 
+            Street choice = (Street)deeds.get(result);
+            choice.upgradeStreet(this);
+         }
       }
    }
 

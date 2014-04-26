@@ -18,7 +18,7 @@ class Go extends Corner
       updateGraphics();
    }
 
-   private void updateGraphics()
+   public void updateGraphics()
    {
       goPanel.update(guests);
    }
