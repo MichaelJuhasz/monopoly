@@ -4,7 +4,7 @@ import java.awt.*;
 class Utility extends Property
 {
    public Player owner;
-   //public String name;
+// public String name;
    private int price;
    private PropertyPanel utilityPanel;
 
@@ -16,11 +16,11 @@ class Utility extends Property
 
    public void payRent(Player p)
    {
-   	int toll;
+    int toll;
       if (owner.getDeeds().contains("Electric Company") &&
-      	  owner.getDeeds().contains("Water Works"))
+       owner.getDeeds().contains("Water Works"))
       {
-      	 toll = p.getRoll() * 10;
+       toll = p.getRoll() * 10;
       }
 
       else toll = p.getRoll() * 4;
@@ -39,4 +39,3 @@ class Utility extends Property
       return utilityPanel;
    }
 }
-

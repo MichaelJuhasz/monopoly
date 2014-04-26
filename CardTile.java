@@ -5,14 +5,14 @@ import java.util.ArrayList;
 class CardTile extends Tile
 {
    private PropertyPanel cardPanel;
-   // public String name;
-   // public int number;
+// public String name;
+// public int number;
    private ArrayList<Player> guests = new ArrayList<Player>();
 
    public CardTile(String n, int num)
    {
       name = n;
-      number = num;   
+      number = num;
       cardPanel = new PropertyPanel(this);
    }
 

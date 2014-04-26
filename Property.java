@@ -6,8 +6,8 @@ abstract class Property extends Tile
 {
    private int price;
    public Player owner;
-   // public String name;
-   // public int number;
+// public String name;
+// public int number;
    // public ArrayList<Player> guests = new ArrayList<Player>();
 
    public Property(int num, int p, String n)
@@ -22,23 +22,23 @@ abstract class Property extends Tile
       guests.add(p);
       updateGraphics();
 
-      if (owner == null) 
+      if (owner == null)
       {
-    	  Object [] options = {"Buy", "Pass"};
+     Object [] options = {"Buy", "Pass"};
          int response = JOptionPane.showOptionDialog(
-         	               null,
-         	               "Do you want to buy "+name+" for "+price+"?",
-         	               name,
-         	               JOptionPane.YES_NO_OPTION,
-         	               JOptionPane.PLAIN_MESSAGE,
-         	               null,
-         	               options,
-         	               options[0]
-         	            );
+          null,
+          "Do you want to buy "+name+" for "+price+"?",
+          name,
+          JOptionPane.YES_NO_OPTION,
+          JOptionPane.PLAIN_MESSAGE,
+          null,
+          options,
+          options[0]
+          );
          if (response == 0)
          {
             if (p.getFunds() < price) JOptionPane.showMessageDialog(null,"Not enough funds!","Not enough funds!", JOptionPane.ERROR_MESSAGE);
-            else 
+            else
             {
                p.payment(-price);
                p.addAsset(price);
@@ -49,7 +49,7 @@ abstract class Property extends Tile
          }
       }
 
-      else if (owner != p) 
+      else if (owner != p)
       {
          payRent(p);
       }

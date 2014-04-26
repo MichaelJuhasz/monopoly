@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -16,18 +17,18 @@ class StreetPanel extends JPanel
       street = s;
       color = s.color;
       name = s.name;
-      width = 50;
+      width = 100;
       height = 100;
       houses = 0;
-      angle = (s.getNumber() / 10) * 90;
+      angle = ((s.getNumber()-1) / 10) * 90;
 
      /*
-      // Center the text (maybe) from: http://stackoverflow.com/questions/3213045/centering-text-in-a-jtextarea-or-jtextpane-horizontal-text-alignment
-      StyledDocument doc = textPane.getStyledDocument();
-      SimpleAttributeSet center = new SimpleAttributeSet();
-      StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-      doc.setParagraphAttributes(0, doc.getLength(), center, false);
-      */
+// Center the text (maybe) from: http://stackoverflow.com/questions/3213045/centering-text-in-a-jtextarea-or-jtextpane-horizontal-text-alignment
+StyledDocument doc = textPane.getStyledDocument();
+SimpleAttributeSet center = new SimpleAttributeSet();
+StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+doc.setParagraphAttributes(0, doc.getLength(), center, false);
+*/
    }
 
    public void update(ArrayList<Player> g, int h)
@@ -46,23 +47,23 @@ class StreetPanel extends JPanel
       
       if (angle == 90) g.translate(height, 0);
       else if (angle == 180) g.translate(width, height);
-      else if (angle == 270) g.translate(0, width);      
+      else if (angle == 270) g.translate(0, width);
 
       // Rotate tile accorinding to position on the board (i.e. its number)
       g.rotate(Math.toRadians(angle));
 
-      // Draw colored box 
+      // Draw colored box
       g.setColor(color);
       g.fillRect(0,0,width,height/4);
 
       // Draw border around tile
       g.setColor(Color.BLACK);
       g.setStroke(new BasicStroke(3));
-      g.drawRect(0, 0, width, height);
-      g.drawLine(0, height/4, width, height/4);
+      g.drawRect(0,0,width,height);
+      g.drawLine(0,height/4,width,height/4);
 
       // Write name of tile
-      g.drawString(name, width/2, height/4 + 20);
+      g.drawString(name,width/2,height/4+20);
 
       // Draw houses or hotel
       g.setStroke(new BasicStroke(1));
@@ -87,7 +88,7 @@ class StreetPanel extends JPanel
          for (int i = 0; i < guests.size(); i++)
          {
             ImageIcon icon = guests.get(i).getIcon();
-          //  g.drawImage(icon, (5 + (i * houseWidth)), height/2, null);
+          // g.drawImage(icon, (5 + (i * houseWidth)), height/2, null);
             g.drawImage(icon.getImage(), (5 + (i * icon.getIconWidth())), height/2, null);
          }
       }

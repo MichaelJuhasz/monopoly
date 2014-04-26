@@ -4,19 +4,19 @@ import java.util.ArrayList;
 
 class Street extends Property
 {
-   private int rent, oneHs, twoHs, threeHs, fourHs, hotel, bldgCost, houses;
+   private int number, rent, oneHs, twoHs, threeHs, fourHs, hotel, price, bldgCost, houses;
    public Player owner;
-   // public String name;
+ // public String name;
    public Color color;
    private ArrayList<Street> group = new ArrayList<Street>();
    private boolean monopoly = false;
 
    private StreetPanel streetpanel;
 
-   public Street(int num, int r, int one, int two, int three, int four, 
-   	               int htl, int p, int bldgC, String n, Color c)
+   public Street(int num, int r, int one, int two, int three, int four,
+    int htl, int p, int bldgC, String n, Color c)
    {
-   	super(num, p, n);
+    super(num, p, n);
 
       rent = r;
       oneHs = one;
@@ -34,26 +34,26 @@ class Street extends Property
 
    public void setGroup(Street s1, Street s2, Street s3)
    {
-	  if (group.isEmpty())
-	  {
+if (group.isEmpty())
+{
          group.add(s1);
          group.add(s2);
          group.add(s3);
-	  }
+}
    }
 
    public void setGroup(Street s1, Street s2)
    {
-	  if (group.isEmpty()) 
-	  {
+if (group.isEmpty())
+{
          group.add(s1);
          group.add(s2);
-	  }
+}
    }
 
    public void payRent(Player p)
    {
-   	  int toll = 0;
+    int toll = 0;
       if (!monopoly) toll = rent;
       else
       {
@@ -70,7 +70,7 @@ class Street extends Property
             case 4: toll = fourHs;
                     break;
             case 5: toll = hotel;
-                    break;                                
+                    break;
          }
 
       }
@@ -87,8 +87,8 @@ class Street extends Property
       else if (group.size() == 3)
       {
          if (group.get(0).owner == group.get(1).owner &&
-         	 group.get(1).owner == group.get(2).owner) monopoly = true;
-      } 
+          group.get(1).owner == group.get(2).owner) monopoly = true;
+      }
    }
 
    // You can only upgrade a tile if you have a monopoly on that group
@@ -98,10 +98,10 @@ class Street extends Property
    {
       if (houses >= 5) JOptionPane.showMessageDialog(null, name+" is already fully upgraded.", "Cannot Upgrade.", JOptionPane.ERROR_MESSAGE);
       
-      else 
+      else
       {
-	      if (monopoly)
-	      {
+if (monopoly)
+{
             int i = group.indexOf(this);
             boolean upgradable = true;
 
@@ -111,23 +111,23 @@ class Street extends Property
                {
                   upgradable = false;
                   JOptionPane.showMessageDialog(null, "Properties must be upgraded equally.", "Cannot Upgrade.", JOptionPane.ERROR_MESSAGE);
-               }  
+               }
             }
 
-	         if (upgradable)
+if (upgradable)
             {
-               if (p.getFunds() >= bldgCost) 
-	            {
-	               JOptionPane.showMessageDialog(null, name+" upgraded!", "Success!", JOptionPane.INFORMATION_MESSAGE);
-	               houses++;
-	               p.payment(bldgCost * -1);   
-	            }
+               if (p.getFunds() >= bldgCost)
+{
+JOptionPane.showMessageDialog(null, name+" upgraded!", "Success!", JOptionPane.INFORMATION_MESSAGE);
+houses++;
+p.payment(bldgCost * -1);
+}
 
-	            else JOptionPane.showMessageDialog(null,"Not enough funds!","Not enough funds!", JOptionPane.ERROR_MESSAGE);
-	         }
+else JOptionPane.showMessageDialog(null,"Not enough funds!","Not enough funds!", JOptionPane.ERROR_MESSAGE);
+}
          }
 
-	      else JOptionPane.showMessageDialog(null, "You must own all properties of this color before any can be upgraded.", "Cannot Upgrade.", JOptionPane.ERROR_MESSAGE);
+else JOptionPane.showMessageDialog(null, "You must own all properties of this color before any can be upgraded.", "Cannot Upgrade.", JOptionPane.ERROR_MESSAGE);
       }
    }
 
@@ -136,7 +136,7 @@ class Street extends Property
       streetpanel.update(guests, houses);
    }
 
-   // Used by main to instantiate StreetPanel objects. 
+   // Used by main to instantiate StreetPanel objects.
    public JPanel getPanel()
    {
       return streetpanel;

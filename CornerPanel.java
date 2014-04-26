@@ -14,7 +14,7 @@ class CornerPanel extends JPanel
       width = 100;
       height = 100;
       name = c.name;
-      angle = ((c.getNumber() - 1)/ 10) * 90;
+      angle = ((c.getNumber()-1) / 10) * 90;
 
    }
 
@@ -30,7 +30,6 @@ class CornerPanel extends JPanel
       g.setRenderingHint ( RenderingHints.KEY_ANTIALIASING,
                            RenderingHints.VALUE_ANTIALIAS_ON);
 
-      
       if (angle == 90) g.translate(height, 0);
       else if (angle == 180) g.translate(width, height);
       else if (angle == 270) g.translate(0, width);
@@ -50,7 +49,7 @@ class CornerPanel extends JPanel
          for (int i = 0; i < guests.size(); i++)
          {
             ImageIcon icon = guests.get(i).getIcon();
- //           g.drawImage(icon, (5 + (i * houseWidth)), height/2, null);
+ // g.drawImage(icon, (5 + (i * houseWidth)), height/2, null);
             g.drawImage(icon.getImage(), (5 + (i * icon.getIconWidth())), height/2, null);
          }
       }

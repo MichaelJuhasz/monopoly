@@ -3,24 +3,24 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-class Monopoly 
+class Monopoly
 {
    public static ArrayList<Tile> tileList = new ArrayList<Tile>();
 
    public static JPanel setUpBoard ()
    {
       Color purple = new Color(195,67,238);
-   	  Color lightBlue = new Color(165,225,232);
+    Color lightBlue = new Color(165,225,232);
       Color pink = new Color(230,0,176);
-   	  Color orange = new Color(255,150,31);
-   	  Color red = new Color (255,31,31);
-     	Color yellow = new Color (255,236,31);
-     	Color green = new Color(6,125,8);
-     	Color darkBlue = new Color(6,48,125);
+    Color orange = new Color(255,150,31);
+    Color red = new Color (255,31,31);
+      Color yellow = new Color (255,236,31);
+      Color green = new Color(6,125,8);
+      Color darkBlue = new Color(6,48,125);
 
       // Bottom of the board
       tileList.add(new Go());
-      Street tile2 = new Street(2,2,10,30,90,160,250,60,50,"MEDDITERRANEAN AVENUE",purple);
+      Street tile2 = new Street(2,2,10,30,90,160,250,60,50,"MEDDITERRANEAN AVENUE", purple);
       tileList.add(tile2);
       tileList.add(new CardTile("COMMUNITY CHEST",3));
       Street tile4 = new Street(4,4,20,60,180,320,450,60,50,"BALTIC AVENUE", purple);
@@ -35,7 +35,7 @@ class Monopoly
       Street tile10 = new Street(10,8,40,100,300,450,600,120,50,"CONNECTICUT AVENUE",lightBlue);
       tileList.add(tile10);
       
-      // Left side of the board 
+      // Left side of the board
       tileList.add(new Jail());
       Street tile12 = new Street(12,10,50,150,450,625,750,140,100,"ST. CHARLES PLACE",pink);
       tileList.add(tile12);
@@ -88,7 +88,7 @@ class Monopoly
       Street tile40 = new Street(40,50,200,600,1400,1700,2000,400,200,"BOARDWALK",darkBlue);
       tileList.add(tile40);
    
-      // After all the Streets have been instantiated, we can group them (tediously)  
+      // After all the Streets have been instantiated, we can group them (tediously)
       
       // Purples
       tile2.setGroup(tile2, tile4);
@@ -134,7 +134,7 @@ class Monopoly
       south.setLayout(new BoxLayout(south, BoxLayout.LINE_AXIS));
       south.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
       south.setPreferredSize(new Dimension(650,100));
-
+      
       // west needs to be loaded backwards, with the largest element loaded first
       JPanel west = new JPanel();
       west.setLayout(new BoxLayout(west, BoxLayout.PAGE_AXIS));
@@ -148,8 +148,8 @@ class Monopoly
       east.setLayout(new BoxLayout(east, BoxLayout.PAGE_AXIS));
       east.setPreferredSize(new Dimension(100,450));
 
-      // Because we'll be using BorderLayout from the gameboard panel, 
-      // and because of how regions overlap in BorderLayout, the south 
+      // Because we'll be using BorderLayout from the gameboard panel,
+      // and because of how regions overlap in BorderLayout, the south
       // and north panels must contain all the corners.
 
       // This should be "GO" through "JAIL"
@@ -159,21 +159,21 @@ class Monopoly
       }
 
       for (int i = 19; i >= 11; i--)
-      {
-         west.add(tileList.get(i).getPanel());
-      }
+       {
+          west.add(tileList.get(i).getPanel());
+       }
 
-      for (int i = 20; i < 31; i++)
-      {
-         north.add(tileList.get(i).getPanel());
-      }
+       for (int i = 20; i < 31; i++)
+       {
+          north.add(tileList.get(i).getPanel());
+       }
 
-      for (int i = 31; i < 40; i++)
-      {
-         east.add(tileList.get(i).getPanel());
-      }
-
-      JLabel monoLabel = new JLabel("Monopoly");
+       for (int i = 31; i < 40; i++)
+       {
+          east.add(tileList.get(i).getPanel());
+       }
+       
+       JLabel monoLabel = new JLabel("Monopoly");
 
       // Make the game board JPanel and load it with these guys
       JPanel gameBoard = new JPanel(new BorderLayout());
@@ -194,7 +194,7 @@ class Monopoly
       JPanel gameBoard = setUpBoard();
       gameWindow.add(gameBoard, BorderLayout.CENTER);
       
-      
+      gameWindow.setVisible(true);
       gameWindow.setSize(850,650);
       gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -221,9 +221,9 @@ class Monopoly
          // icon stuff
          String [] choices = {"Cannon", "Dog", "Hat", "Horse", "Iron", "Ship", "Thimbal", "Wheelbarrow"};
          int iconChoice = JOptionPane.showOptionDialog(
-                                   null, 
+                                   null,
                                    "Which token does player "+i+" want?",
-                                   "Get ready to Monopolize", 
+                                   "Get ready to Monopolize",
                                    JOptionPane.DEFAULT_OPTION,
                                    JOptionPane.QUESTION_MESSAGE,
                                    null,
@@ -240,6 +240,5 @@ class Monopoly
 
       ControlPanel controlPanel = new ControlPanel(players);
       gameWindow.add(controlPanel, BorderLayout.EAST);
-      gameWindow.setVisible(true);
    }
 }
