@@ -5,6 +5,7 @@ import java.awt.event.*;
 class ControlPanel extends JPanel implements ActionListener
 {
    private JLabel label = new JLabel();
+   private JLabel funds = new JLabel("Funds: ");
    private JButton roll = new JButton ("Roll Dice");
    private JButton upgrade = new JButton ("Upgrade Property");
    private JButton fine = new JButton ("Pay Fine");
@@ -25,10 +26,18 @@ class ControlPanel extends JPanel implements ActionListener
       labelC.ipady = 20;
       add(label, labelC);
 
+      GridBagConstraints fundsC = new GridBagConstraints();
+      fundsC.fill = GridBagConstraints.HORIZONTAL;
+      fundsC.gridx = 0;
+      fundsC.gridy = 1;
+      fundsC.gridwidth = 2;
+      fundsC.ipady = 20;
+      add(funds, fundsC);
+
       GridBagConstraints rollC = new GridBagConstraints();
       rollC.fill = GridBagConstraints.HORIZONTAL;
       rollC.gridx = 0;
-      rollC.gridy = 1;
+      rollC.gridy = 2;
       rollC.gridwidth = 2;
       roll.addActionListener(this);
       add(roll, rollC);
@@ -36,21 +45,21 @@ class ControlPanel extends JPanel implements ActionListener
       GridBagConstraints upgradeC = new GridBagConstraints();
       upgradeC.fill = GridBagConstraints.HORIZONTAL;
       upgradeC.gridx = 0;
-      upgradeC.gridy = 2;
+      upgradeC.gridy = 3;
       upgrade.addActionListener(this);
       add(upgrade, upgradeC);
 
       GridBagConstraints fineC = new GridBagConstraints();
       fineC.fill = GridBagConstraints.HORIZONTAL;
       fineC.gridx = 1;
-      fineC.gridy = 2;
+      fineC.gridy = 3;
       fine.addActionListener(this);
       add(fine, fineC);
 
       GridBagConstraints endC = new GridBagConstraints();
       endC.fill = GridBagConstraints.HORIZONTAL;
       endC.gridx = 0;
-      endC.gridy = 3;
+      endC.gridy = 4;
       endC.gridwidth = 2;
       end.addActionListener(this);
       add(end, endC);
@@ -63,7 +72,14 @@ class ControlPanel extends JPanel implements ActionListener
    {
       player = p;
       label.setText(p.getName());
+      //funds.setText("Funds: "+player.getFunds());
+      updateFunds();
       player.beginTurn();
+   }
+
+   public void updateFunds()
+   {
+      funds.setText("Funds: "+player.getFunds());
    }
 
    public void actionPerformed(ActionEvent e)

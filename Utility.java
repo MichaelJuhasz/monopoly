@@ -24,7 +24,8 @@ class Utility extends Property
       }
 
       else toll = p.getRoll() * 4;
-
+      
+      JOptionPane.showMessageDialog(null, "You must pay $"+toll+" to "+owner.getName(), "Pay Rent.", JOptionPane.ERROR_MESSAGE);
       p.payment(toll * -1);
       owner.payment(toll);
    }

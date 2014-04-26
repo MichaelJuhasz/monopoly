@@ -14,7 +14,7 @@ abstract class Corner extends Tile
       name = n;
    } 
 
-   void landedOn(Player p)
+   public void landedOn(Player p)
    {
 	  guests.add(p);
 	  updateGraphics();

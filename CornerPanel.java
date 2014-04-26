@@ -15,7 +15,7 @@ class CornerPanel extends JPanel
       height = 100;
       name = c.name;
       angle = ((c.getNumber()-1) / 10) * 90;
-
+      //setMinimumSize(new Dimension(100,100));
    }
 
    public void update(ArrayList<Player> g)
@@ -45,9 +45,6 @@ class CornerPanel extends JPanel
       g.setStroke(new BasicStroke(3));
       g.drawRect(0,0,width,height);
 
-      // Write name of tile
-      g.drawString(name, width/2, height/4+20);
-
       // Draw any player tokens that are sitting on this tile
       if (!guests.isEmpty())
       {
@@ -58,6 +55,10 @@ class CornerPanel extends JPanel
             g.drawImage(icon.getImage(), (5 + (i * icon.getIconWidth())), height/2, null);
          }
       }
+
+      // Write name of tile
+      g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
+      g.drawString(name, width/2, height/4+20);
 
       g.rotate(-(Math.toRadians(angle)));
    }

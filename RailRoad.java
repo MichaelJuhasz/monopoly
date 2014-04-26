@@ -30,6 +30,7 @@ class RailRoad extends Property
       }
 
       toll = (int) (25 * Math.pow(2, rails - 1));
+      JOptionPane.showMessageDialog(null, "You must pay $"+toll+" to "+owner.getName(), "Pay Rent.", JOptionPane.ERROR_MESSAGE);
       p.payment(-toll);
       owner.payment(toll);
    }

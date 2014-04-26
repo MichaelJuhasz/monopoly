@@ -24,7 +24,7 @@ abstract class Property extends Tile
 
       if (owner == null)
       {
-     Object [] options = {"Buy", "Pass"};
+         Object [] options = {"Buy", "Pass"};
          int response = JOptionPane.showOptionDialog(
           null,
           "Do you want to buy "+name+" for $"+price+"?",

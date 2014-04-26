@@ -54,7 +54,7 @@ class Street extends Property
    public void payRent(Player p)
    {
     int toll = 0;
-      if (!monopoly) toll = rent;
+      if (!checkMonopoly()) toll = rent;
       else
       {
          switch (houses)
@@ -79,17 +79,18 @@ class Street extends Property
       owner.payment(toll);
    }
 
-   private void checkMonopoly()
+   private boolean checkMonopoly()
    {
       if (group.size() == 2)
       {
-         if (group.get(0).owner == group.get(1).owner) monopoly = true;
+         if (group.get(0).owner == group.get(1).owner) return true;
       }
       else if (group.size() == 3)
       {
          if (group.get(0).owner == group.get(1).owner &&
-          group.get(1).owner == group.get(2).owner) monopoly = true;
+          group.get(1).owner == group.get(2).owner) return true;
       }
+      return false;
    }
 
    // You can only upgrade a tile if you have a monopoly on that group
@@ -101,8 +102,8 @@ class Street extends Property
       
       else
       {
-if (monopoly)
-{
+         if (checkMonopoly())
+         {
             int i = group.indexOf(this);
             boolean upgradable = true;
 
@@ -115,20 +116,20 @@ if (monopoly)
                }
             }
 
-if (upgradable)
+            if (upgradable)
             {
                if (p.getFunds() >= bldgCost)
-{
-JOptionPane.showMessageDialog(null, name+" upgraded!", "Success!", JOptionPane.INFORMATION_MESSAGE);
-houses++;
-p.payment(bldgCost * -1);
-}
+               {
+                  JOptionPane.showMessageDialog(null, name+" upgraded!", "Success!", JOptionPane.INFORMATION_MESSAGE);
+                  houses++;
+                  p.payment(bldgCost * -1);
+               }
 
-else JOptionPane.showMessageDialog(null,"Not enough funds!","Not enough funds!", JOptionPane.ERROR_MESSAGE);
-}
+               else JOptionPane.showMessageDialog(null,"Not enough funds!","Not enough funds!", JOptionPane.ERROR_MESSAGE);
+            }
          }
 
-else JOptionPane.showMessageDialog(null, "You must own all properties of this color before any can be upgraded.", "Cannot Upgrade.", JOptionPane.ERROR_MESSAGE);
+         else JOptionPane.showMessageDialog(null, "You must own all properties of this color before any can be upgraded.", "Cannot Upgrade.", JOptionPane.ERROR_MESSAGE);
       }
    }
 

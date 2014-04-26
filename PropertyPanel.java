@@ -13,10 +13,10 @@ class PropertyPanel extends JPanel
    {
       name = u.name;
  // width = 50;
-      width = 100;
+      width = 50;
       height = 100;
       angle = ((u.getNumber()-1) / 10) * 90;
-
+      //setMaximumSize(new Dimension(50,100));
       /*
 // Center the text (maybe) from: http://stackoverflow.com/questions/3213045/centering-text-in-a-jtextarea-or-jtextpane-horizontal-text-alignment
 StyledDocument doc = textPane.getStyledDocument();
@@ -55,7 +55,8 @@ doc.setParagraphAttributes(0, doc.getLength(), center, false);
       g.drawRect(0,0,width,height);
 
       // Write name of tile
-      g.drawString(name,width/2, height/4+20);
+      g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 10));
+      g.drawString(name, 0, 20);
 
       // Draw any player tokens that are sitting on this tile
       if (!guests.isEmpty())

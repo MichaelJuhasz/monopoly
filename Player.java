@@ -19,7 +19,8 @@ class Player
       name = n;
       token = icon;
       currentTile = Monopoly.tileList.get(0);
-      funds = 1500;
+      funds = 1300;
+      currentTile.landedOn(this);
    } 
 
    // This method will control the graphics (populating the sidebar with 
@@ -74,6 +75,7 @@ class Player
       else if (canRoll && inJail)
       {
          int gotOut = Dice.getInstance().roll(this);
+         canRoll = false;
       }
    }
 
@@ -84,7 +86,7 @@ class Player
 
       int space = currentTile.getNumber() + (n - 1);
 
-      if (space > 40)
+      if (space >= 40)
       {
          funds += 200;
          space = space - 40;  
@@ -126,6 +128,7 @@ class Player
       {
          inJail = false;
          JOptionPane.showMessageDialog(null,"Good job, you got out of jail!", "Got out of Jail", JOptionPane.INFORMATION_MESSAGE);
+         canRoll = false;
       }
 
       if (doubles == 3) goToJail();
@@ -161,6 +164,8 @@ class Player
             {
                funds -= 50;
                inJail = false;
+               canRoll = false;
+               Monopoly.tileList.get(10);
             }
          }
       }

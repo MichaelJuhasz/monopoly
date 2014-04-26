@@ -31,7 +31,7 @@ class Monopoly
       tileList.add(tile7);
       tileList.add(new CardTile("CHANCE",8));
       Street tile9 = new Street(9,6,30,90,270,400,550,100,50,"VERMONT AVENUE",lightBlue);
-      tileList.add(new Street(9,6,30,90,270,400,550,100,50,"VERMONT AVENUE",lightBlue));
+      tileList.add(tile9);
       Street tile10 = new Street(10,8,40,100,300,450,600,120,50,"CONNECTICUT AVENUE",lightBlue);
       tileList.add(tile10);
       
@@ -153,6 +153,7 @@ class Monopoly
       // and north panels must contain all the corners.
 
       // This should be "GO" through "JAIL"
+
       for (int i = 0; i < 11; i++)
       {
          south.add(tileList.get(i).getPanel());
@@ -172,8 +173,10 @@ class Monopoly
        {
           east.add(tileList.get(i).getPanel());
        }
-       
-       JLabel monoLabel = new JLabel("Monopoly");
+
+       ImageIcon logo = new ImageIcon("images/logo.jpg");
+       JLabel monoLabel = new JLabel();
+       monoLabel.setIcon(logo);
 
       // Make the game board JPanel and load it with these guys
       JPanel gameBoard = new JPanel(new BorderLayout());
@@ -233,13 +236,14 @@ class Monopoly
 
       // Set up another custom input dialog
       JPanel panel2 = new JPanel();
-      JLabel lbl2 = new JLabel("What's this player's name?");
+      JLabel lbl2 = new JLabel();
       panel2.add(lbl2);
       panel2.add(txt);
 
       for (int i = 1; i <= playerNum; i++)
       {
          String p = null;
+         lbl2.setText("What is player "+i+"'s name?");
          while (p == null)
          {
             int selected = JOptionPane.showOptionDialog(

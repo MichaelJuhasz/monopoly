@@ -10,9 +10,6 @@ class Jail extends Corner
       jailPanel = new CornerPanel(this);
    }
 
-   public void landedOn()
-   {}
-
    public void updateGraphics()
    {
       jailPanel.update(guests);

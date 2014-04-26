@@ -17,11 +17,11 @@ class StreetPanel extends JPanel
       street = s;
       color = s.color;
       name = s.name;
-      width = 100;
+      width = 50;
       height = 100;
       houses = 0;
       angle = ((s.getNumber()-1) / 10) * 90;
-
+      //setMaximumSize(new Dimension(50,100));
      /*
 // Center the text (maybe) from: http://stackoverflow.com/questions/3213045/centering-text-in-a-jtextarea-or-jtextpane-horizontal-text-alignment
 StyledDocument doc = textPane.getStyledDocument();
@@ -68,7 +68,8 @@ doc.setParagraphAttributes(0, doc.getLength(), center, false);
       g.drawLine(0,height/4,width,height/4);
 
       // Write name of tile
-      g.drawString(name,width/2,height/4+20);
+      g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 10));
+      g.drawString(name, 0, height/4+20);
 
       // Draw houses or hotel
       g.setStroke(new BasicStroke(1));
