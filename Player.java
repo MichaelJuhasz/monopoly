@@ -98,9 +98,9 @@ class Player
       System.out.println("leaving "+currentTile.name);
 
       Tile destinationTile = Monopoly.tileList.get(space);
-      destinationTile.landedOn(this);
 
       currentTile = destinationTile;
+      destinationTile.landedOn(this);
    }
 
    private void move(int destination, boolean toJail)

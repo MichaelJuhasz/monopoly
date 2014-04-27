@@ -74,6 +74,15 @@ class ControlPanel extends JPanel implements ActionListener
       endC.gridwidth = 2;
       end.addActionListener(this);
       add(end, endC);
+      
+      GridBagConstraints diceC = new GridBagConstraints();
+      diceC.fill = GridBagConstraints.HORIZONTAL;
+      diceC.gridx = 0;
+      diceC.gridy = 5;
+      diceC.gridwidth = 2;
+      diceC.ipady = 30;
+      JPanel diceP = Dice.getInstance();
+      add(diceP, diceC);
    }
 
    public void setList(CircularLinkedList ps)
