@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.*;
 
 class Utility extends Property
 {
@@ -7,6 +8,7 @@ class Utility extends Property
 // public String name;
    private int price;
    private PropertyPanel utilityPanel;
+   private ArrayList<Utility> group = new ArrayList<Utility>();
 
    public Utility(int num, String n)
    {
@@ -14,11 +16,20 @@ class Utility extends Property
       utilityPanel = new PropertyPanel(this);
    }
 
+   public void setGroup(Utility s1, Utility s2)
+   {
+      if (group.isEmpty())
+      {
+         group.add(s1);
+         group.add(s2);
+      }
+   }
+
    public void payRent(Player p)
    {
     int toll;
-      if (owner.getDeeds().contains("Electric Company") &&
-       owner.getDeeds().contains("Water Works"))
+      if (owner.getDeeds().contains(group.get(0)) &&
+       owner.getDeeds().contains(group.get(1)))
       {
        toll = p.getRoll() * 10;
       }

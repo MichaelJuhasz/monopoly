@@ -13,7 +13,7 @@ class Go extends Corner
 
    public void landedOn(Player p)
    {
-      p.payment(200);
+      if (!p.firstTurn) p.payment(200);
       guests.add(p);
       updateGraphics();
    }

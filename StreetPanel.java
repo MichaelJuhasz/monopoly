@@ -21,6 +21,7 @@ class StreetPanel extends JPanel
       height = 100;
       houses = 0;
       angle = ((s.getNumber()-1) / 10) * 90;
+      setPreferredSize(new Dimension(50,100));
       //setMaximumSize(new Dimension(50,100));
      /*
 // Center the text (maybe) from: http://stackoverflow.com/questions/3213045/centering-text-in-a-jtextarea-or-jtextpane-horizontal-text-alignment
@@ -65,7 +66,7 @@ doc.setParagraphAttributes(0, doc.getLength(), center, false);
       g.setColor(Color.BLACK);
       g.setStroke(new BasicStroke(3));
       g.drawRect(0,0,width,height);
-      g.drawLine(0,height/4,width,height/4);
+      g.drawLine(0, height/4, width, height/4);
 
       // Write name of tile
       g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 10));
@@ -78,14 +79,18 @@ doc.setParagraphAttributes(0, doc.getLength(), center, false);
       {
          for (int i = 0; i < houses; i++)
          {
+            g.setColor(Color.BLACK);
+            g.drawRect((5 + (i * houseWidth)), 0, houseWidth, (height/4)- 5);
             g.setColor(Color.GREEN);
-            g.fillRect((5 + (i * houseWidth)), 5, houseWidth, (height/4)- 5);
+            g.fillRect((5 + (i * houseWidth)), 0, houseWidth, (height/4)- 5);
          }
       }
       else if (houses == 5)
       {
+         g.setColor(Color.BLACK);
+         g.drawRect((5 + houseWidth), 0, houseWidth * 2, (height/4)- 5);
          g.setColor(Color.RED);
-         g.fillRect((5 + houseWidth), 5, houseWidth * 2, (height/4)- 5);
+         g.fillRect((5 + houseWidth), 0, houseWidth * 2, (height/4)- 5);
       }
 
       // Draw any player tokens that are sitting on this tile

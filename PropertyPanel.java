@@ -16,7 +16,7 @@ class PropertyPanel extends JPanel
       width = 50;
       height = 100;
       angle = ((u.getNumber()-1) / 10) * 90;
-      //setMaximumSize(new Dimension(50,100));
+      setPreferredSize(new Dimension(50,100));
       /*
 // Center the text (maybe) from: http://stackoverflow.com/questions/3213045/centering-text-in-a-jtextarea-or-jtextpane-horizontal-text-alignment
 StyledDocument doc = textPane.getStyledDocument();
@@ -52,7 +52,7 @@ doc.setParagraphAttributes(0, doc.getLength(), center, false);
       // Draw border around tile
       g.setColor(Color.BLACK);
       g.setStroke(new BasicStroke(3));
-      g.drawRect(0,0,width,height);
+      g.drawRect(0, 0, width, height);
 
       // Write name of tile
       g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 10));

@@ -14,7 +14,18 @@ class ControlPanel extends JPanel implements ActionListener
    private CircularLinkedList players;
    private Node playerNode;
 
-   public ControlPanel(CircularLinkedList ps)
+   private static ControlPanel instance = null;
+   
+   public synchronized static ControlPanel getInstance() 
+   {
+      if (instance == null) 
+      {
+         instance = new ControlPanel();
+      }
+      return instance;
+   }
+
+   public ControlPanel()
    {
       setLayout(new GridBagLayout());
       
@@ -63,7 +74,10 @@ class ControlPanel extends JPanel implements ActionListener
       endC.gridwidth = 2;
       end.addActionListener(this);
       add(end, endC);
+   }
 
+   public void setList(CircularLinkedList ps)
+   {
       players = ps;
       playerNode = players.getNodeAt(0);
    }

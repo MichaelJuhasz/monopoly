@@ -13,14 +13,16 @@ class Player
    public String name;
    public Tile currentTile;
    private ImageIcon token;
+   public boolean firstTurn = true;
 
    public Player(String n, ImageIcon icon)
    {
       name = n;
       token = icon;
       currentTile = Monopoly.tileList.get(0);
-      funds = 1300;
+      funds = 1500;
       currentTile.landedOn(this);
+      firstTurn = false;
    } 
 
    // This method will control the graphics (populating the sidebar with 
@@ -88,7 +90,7 @@ class Player
 
       if (space >= 40)
       {
-         funds += 200;
+         payment(200);
          space = space - 40;  
       } 
 
@@ -103,15 +105,19 @@ class Player
 
    private void move(int destination, boolean toJail)
    {
+      Tile destinationTile = Monopoly.tileList.get(destination);
+      
+      // If you pass GO and you're not going to Jail, collect $200
       if (!toJail)
       {
-         // if Go is between position and destination, funds += 200;
-         // Call landedOn method of Tile
+         if (currentTile.getNumber() > destinationTile.getNumber())
+         {
+            funds += 200;  
+         }
       }
 
       currentTile.leave(this);
 
-      Tile destinationTile = Monopoly.tileList.get(destination);
       destinationTile.landedOn(this);
 
       currentTile = destinationTile;
@@ -165,7 +171,7 @@ class Player
                funds -= 50;
                inJail = false;
                canRoll = false;
-               Monopoly.tileList.get(10);
+               currentTile = Monopoly.tileList.get(10);
             }
          }
       }
@@ -174,6 +180,7 @@ class Player
    public void payment(int cost)
    {
       funds += cost;
+      ControlPanel.getInstance().updateFunds();
    }
 
    public void addAsset(int worth)

@@ -123,6 +123,7 @@ class Street extends Property
                   JOptionPane.showMessageDialog(null, name+" upgraded!", "Success!", JOptionPane.INFORMATION_MESSAGE);
                   houses++;
                   p.payment(bldgCost * -1);
+                  updateGraphics();
                }
 
                else JOptionPane.showMessageDialog(null,"Not enough funds!","Not enough funds!", JOptionPane.ERROR_MESSAGE);

@@ -10,10 +10,10 @@ class Monopoly
    public static JPanel setUpBoard ()
    {
       Color purple = new Color(195,67,238);
-    Color lightBlue = new Color(165,225,232);
+      Color lightBlue = new Color(165,225,232);
       Color pink = new Color(230,0,176);
-    Color orange = new Color(255,150,31);
-    Color red = new Color (255,31,31);
+      Color orange = new Color(255,150,31);
+      Color red = new Color (255,31,31);
       Color yellow = new Color (255,236,31);
       Color green = new Color(6,125,8);
       Color darkBlue = new Color(6,48,125);
@@ -39,7 +39,8 @@ class Monopoly
       tileList.add(new Jail());
       Street tile12 = new Street(12,10,50,150,450,625,750,140,100,"ST. CHARLES PLACE",pink);
       tileList.add(tile12);
-      tileList.add(new Utility(13,"ELECTRITC COMPANY"));
+      Utility tile13 = new Utility(13,"ELECTRITC COMPANY");
+      tileList.add(tile13);
       Street tile14 = new Street(14,10,50,150,450,625,750,140,100,"STATES AVENUE",pink);
       tileList.add(tile14);
       Street tile15 = new Street(15,12,60,180,500,700,900,160,100,"VIRGINIA AVENUE",pink);
@@ -67,7 +68,8 @@ class Monopoly
       tileList.add(tile27);
       Street tile28 = new Street(28,22,110,330,800,975,1150,260,150,"VENTNOR AVENUE",yellow);
       tileList.add(tile28);
-      tileList.add(new Utility(29,"WATER WORKS"));
+      Utility tile29 = new Utility(29,"WATER WORKS");
+      tileList.add(tile29);
       Street tile30 = new Street(30,24,120,360,850,1025,1200,280,150,"MARVIN GARDENS",yellow);
       tileList.add(tile30);
 
@@ -128,6 +130,10 @@ class Monopoly
       tile38.setGroup(tile38, tile40);
       tile40.setGroup(tile38, tile40);
 
+      // Utilities 
+      tile13.setGroup(tile13, tile29);
+      tile29.setGroup(tile13, tile29);
+
       // Grab the various JPanels instantiated by the Tile instances and
       // group them into other JPanels
       JPanel south = new JPanel();
@@ -153,7 +159,6 @@ class Monopoly
       // and north panels must contain all the corners.
 
       // This should be "GO" through "JAIL"
-
       for (int i = 0; i < 11; i++)
       {
          south.add(tileList.get(i).getPanel());
@@ -285,7 +290,10 @@ class Monopoly
          players.add(pl);
       }
 
-      ControlPanel controlPanel = new ControlPanel(players);
+      //ControlPanel controlPanel = new ControlPanel(players);
+      ControlPanel controlPanel = ControlPanel.getInstance();
+      controlPanel.setList(players);
+
       gameWindow.add(controlPanel, BorderLayout.EAST);
 
       System.out.println(players.getSize());
