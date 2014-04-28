@@ -160,16 +160,19 @@ class Monopoly
          south.add(tileList.get(i).getPanel());
       }
 
+      // ST. CHARLES PLACE through NEW YORK AVENUE 
       for (int i = 19; i >= 11; i--)
        {
           west.add(tileList.get(i).getPanel());
        }
 
+       // FREE PARKING through GO TO JAIL
        for (int i = 20; i < 31; i++)
        {
           north.add(tileList.get(i).getPanel());
        }
 
+       // PACIFIC AVENUE through BOARDWALK
        for (int i = 31; i < 40; i++)
        {
           east.add(tileList.get(i).getPanel());

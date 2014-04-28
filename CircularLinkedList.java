@@ -50,6 +50,14 @@ class CircularLinkedList
       size--;
    }
 
+   public void remove(Node n)
+   {
+      for (int i = 0; i < size; i++)
+      {
+         if (getNodeAt(i) == n) removeAt(i);
+      }
+   }
+
    public int getSize()
    {
       return size;

@@ -98,7 +98,6 @@ class ControlPanel extends JPanel implements ActionListener
    {
       player = p;
       label.setText(p.getName());
-      //funds.setText("Funds: "+player.getFunds());
       updateFunds();
       player.beginTurn();
    }
@@ -106,6 +105,20 @@ class ControlPanel extends JPanel implements ActionListener
    public void updateFunds()
    {
       funds.setText("Funds: "+player.getFunds());
+      if (player.getFunds() < 0) 
+      {
+         JOptionPane.showMessageDialog(null, player.getName()+" is out of the game.","Game Over", JOptionPane.ERROR_MESSAGE);
+         player.endTurn();
+         playerNode = players.getNext(playerNode);
+         takeATurn((Player)playerNode.getData());
+         players.remove(playerNode);
+      }
+      if (players.getSize() == 1) 
+      {
+         Player victor = (Player)players.getNodeAt(0).getData();
+         String name = victor.getName();
+         JOptionPane.showMessageDialog(null, name+ "has won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+      }
    }
 
    public void actionPerformed(ActionEvent e)

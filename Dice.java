@@ -41,7 +41,6 @@ class Dice extends JPanel
       int roll1 = rand.nextInt(6) + 1;
       int roll2 = rand.nextInt(6) + 1;
 
-      System.out.println(roll1+"\t"+roll2);
       if (roll1 == roll2) p.doubleRoll();
 
       setImage(roll1, dieOne);

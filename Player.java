@@ -15,6 +15,13 @@ class Player
    private ImageIcon token;
    public boolean firstTurn = true;
 
+   // Each Player begins on GO (the zeroth position in the tileList)
+   // and begins with $1500.  The reason for the firstTurn boolean is
+   // that Go's landedOn must be called to draw the icons, however, 
+   // that method ordinarily calls the Player's payment method.  This 
+   // wouldn't be a problem except that payment references the ControlPanel
+   // which is instantiated after the Players.  Thus, firstTurn allows
+   // Go to draw the icons, but not call the Players' payment method.  
    public Player(String n, ImageIcon icon)
    {
       name = n;
@@ -71,7 +78,7 @@ class Player
       {
          canRoll = false;
          rollResult = Dice.getInstance().roll(this);
-         //if (doubles == 0 || doubles >= 3) canRoll = false;
+
          if (!inJail) move(rollResult);
       }
       else if (canRoll && inJail)
@@ -174,6 +181,38 @@ class Player
       }
    }
 
+   // Another method called by a control panel button
+   public void upgrade()
+   {
+      if(canUpgrade)
+      {
+         Object [] names = new String[deeds.size()];
+         for (int i = 0; i < deeds.size(); i++)
+         {
+            Property prop = deeds.get(i);
+            if (prop instanceof Street) names[i] = prop.name;
+         }
+
+         String s = (String)JOptionPane.showInputDialog(null, 
+                                    "Which property do you want to upgrade?",
+                                    "Property Upgrade",
+                                    //JOptionPane.DEFAULT_OPTION,
+                                    JOptionPane.QUESTION_MESSAGE,
+                                    null, 
+                                    names,
+                                    names[0]
+                                 );
+         if (s != null) 
+         {
+            int result = Arrays.asList(names).indexOf(s);       
+            Street choice = (Street)deeds.get(result);
+            choice.upgradeStreet(this);
+         }
+      }
+   }
+
+// Setter methods: 
+   
    public void payment(int cost)
    {
       funds += cost;
@@ -190,35 +229,6 @@ class Player
       deeds.add(p);
    }
 
-   // Another method called by a control panel button
-   public void upgrade()
-   {
-      if(canUpgrade)
-      {
-         Object [] names = new String[deeds.size()];
-         for (int i = 0; i < deeds.size(); i++)
-         {
-            Property prop = deeds.get(i);
-            if (prop instanceof Street) names[i] = prop.name;
-         }
-
-         String s = (String)JOptionPane.showInputDialog(null, 
-         	                        "Which property do you want to upgrade?",
-         	                        "Property Upgrade",
-                                    //JOptionPane.DEFAULT_OPTION,
-         	                        JOptionPane.QUESTION_MESSAGE,
-         	                        null, 
-         	                        names,
-         	                        names[0]
-         	                     );
-         if (s != null) 
-         {
-            int result = Arrays.asList(names).indexOf(s);     	 
-            Street choice = (Street)deeds.get(result);
-            choice.upgradeStreet(this);
-         }
-      }
-   }
 
 // Getter methods:
 
