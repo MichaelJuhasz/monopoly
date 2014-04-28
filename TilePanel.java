@@ -5,14 +5,14 @@ import java.util.ArrayList;
 class TilePanel extends JPanel
 {
    private int width, height, angle;
-   public String name;
+//   public String name;
    private ArrayList<Player> guests = new ArrayList<Player>();
    
    public TilePanel(Tile c, int w, int h)
    {
       width = w;
       height = h;
-      name = c.name;
+  //    name = c.name;
       angle = ((c.getNumber()-1) / 10) * 90;
       setPreferredSize(new Dimension(100,100));
    }

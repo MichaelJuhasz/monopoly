@@ -63,7 +63,7 @@ class TaxTile extends Tile
       updateGraphics();
    }
 
-   private void updateGraphics()
+   public void updateGraphics()
    {
       taxPanel.update(guests);
    }

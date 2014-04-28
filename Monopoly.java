@@ -200,6 +200,7 @@ class Monopoly
       
       gameWindow.setVisible(true);
       gameWindow.setSize(880,650);
+      gameWindow.setResizable(false);
       gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
       // Set up a custom input dialog

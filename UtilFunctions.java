@@ -21,5 +21,5 @@ class UtilFunctions
       g.drawRect(0,0,width,height);
 	}
 
-	public static void 
+ 
 }
