@@ -2,27 +2,31 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-class CornerPanel extends JPanel
+class CornerPanel extends TilePanel
 {
    private int width, height, angle;
    public String name;
    private ArrayList<Player> guests = new ArrayList<Player>();
-   //private ArrayList<BufferedImage> tokens = new ArrayList<BufferedImage>();
 
-   public CornerPanel(Corner c)
+   // public CornerPanel(Corner c)
+   // {
+   //    width = 100;
+   //    height = 100;
+   //    name = c.name;
+   //    angle = ((c.getNumber()-1) / 10) * 90;
+   //    setPreferredSize(new Dimension(100,100));
+   // }
+
+   public CornerPanel()
    {
-      width = 100;
-      height = 100;
-      name = c.name;
-      angle = ((c.getNumber()-1) / 10) * 90;
       setPreferredSize(new Dimension(100,100));
    }
 
-   public void update(ArrayList<Player> g)
-   {
-      guests = g;
-      super.repaint();
-   }
+   // public void update(ArrayList<Player> g)
+   // {
+   //    guests = g;
+   //    super.repaint();
+   // }
 
    public void paintComponent (Graphics g2)
    {
@@ -44,24 +48,24 @@ class CornerPanel extends JPanel
       // g.setColor(Color.BLACK);
       // g.setStroke(new BasicStroke(3));
       // g.drawRect(0,0,width,height);
-      UtilFunctions.drawBox(g, width, height, angle);
+      // UtilFunctions.drawBox(g, width, height, angle);
 
       // Draw any player tokens that are sitting on this tile
-      if (!guests.isEmpty())
-      {
-         for (int i = 0; i < guests.size(); i++)
-         {
-            ImageIcon icon = guests.get(i).getIcon();
-            g.drawImage(icon.getImage(), 5, height/4 + (i * 20), null);
-         }
-      }
+      // if (!guests.isEmpty())
+      // {
+      //    for (int i = 0; i < guests.size(); i++)
+      //    {
+      //       ImageIcon icon = guests.get(i).getIcon();
+      //       g.drawImage(icon.getImage(), 5, height/4 + (i * 20), null);
+      //    }
+      // }
 
       // Write name of tile
       g.rotate(Math.toRadians(-45));
       g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
       g.drawString(name, -15, height/4+20);
 
-      g.rotate(-(Math.toRadians(angle)));
+      // g.rotate(-(Math.toRadians(angle)));
    }
 
 }
