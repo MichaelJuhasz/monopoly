@@ -7,7 +7,7 @@ class CardTile extends Tile
    private PropertyPanel cardPanel;
 // public String name;
 // public int number;
-   private ArrayList<Player> guests = new ArrayList<Player>();
+// private ArrayList<Player> guests = new ArrayList<Player>();
 
    public CardTile(String n, int num)
    {
@@ -16,19 +16,19 @@ class CardTile extends Tile
       cardPanel = new PropertyPanel(this);
    }
 
-   public void landedOn(Player p)
-   {
-      guests.add(p);
-      updateGraphics();
-   }
+   // public void landedOn(Player p)
+   // {
+   //    guests.add(p);
+   //    updateGraphics();
+   // }
 
-   public void leave(Player p)
-   {
-      guests.remove(p);
-      updateGraphics();
-   }
+   // public void leave(Player p)
+   // {
+   //    guests.remove(p);
+   //    updateGraphics();
+   // }
 
-   private void updateGraphics()
+   public void updateGraphics()
    {
       cardPanel.update(guests);
    }

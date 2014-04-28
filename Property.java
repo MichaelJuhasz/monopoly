@@ -55,11 +55,11 @@ abstract class Property extends Tile
       }
    }
 
-   public void leave(Player p)
-   {
-      guests.remove(p);
-      updateGraphics();
-   }
+   // public void leave(Player p)
+   // {
+   //    guests.remove(p);
+   //    updateGraphics();
+   // }
 
    abstract void payRent(Player p);
 

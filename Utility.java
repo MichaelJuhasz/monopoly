@@ -27,9 +27,17 @@ class Utility extends Property
 
    public void payRent(Player p)
    {
-    int toll;
-      if (owner.getDeeds().contains(group.get(0)) &&
-       owner.getDeeds().contains(group.get(1)))
+      ArrayList<Property> properties = owner.getDeeds();
+      int utils = 0;
+
+      for (int i = 0; i < properties.size(); i++)
+      {
+         Property prop = properties.get(i);
+         if (prop instanceof Utility) utils++;
+      }
+
+      int toll;
+      if (utils == 2)
       {
        toll = p.getRoll() * 10;
       }

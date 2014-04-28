@@ -27,6 +27,7 @@ class Dice extends JPanel
    
    protected Dice()
    {  
+      setBackground(Color.WHITE);
 	    dieOne = new JLabel(one);
 	    dieTwo = new JLabel(six);
       setLayout(new GridLayout(1,2));

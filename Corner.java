@@ -14,17 +14,17 @@ abstract class Corner extends Tile
       name = n;
    } 
 
-   public void landedOn(Player p)
-   {
-	  guests.add(p);
-	  updateGraphics();
-   }
+   // public void landedOn(Player p)
+   // {
+	  // guests.add(p);
+	  // updateGraphics();
+   // }
    
-   public void leave(Player p)
-   {
-	   guests.remove(p);
-	   updateGraphics();
-   }
+   // public void leave(Player p)
+   // {
+	  //  guests.remove(p);
+	  //  updateGraphics();
+   // }
 
    abstract void updateGraphics();
 }

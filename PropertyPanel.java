@@ -7,23 +7,14 @@ class PropertyPanel extends JPanel
    private String name;
    private int width, height, angle;
    private ArrayList<Player> guests = new ArrayList<Player>();
-   //private ArrayList<BufferedImage> tokens = new ArrayList<BufferedImage>();
-
+   
    public PropertyPanel(Tile u)
    {
       name = u.name;
- // width = 50;
       width = 50;
       height = 100;
       angle = ((u.getNumber()-1) / 10) * 90;
       setPreferredSize(new Dimension(50,100));
-      /*
-// Center the text (maybe) from: http://stackoverflow.com/questions/3213045/centering-text-in-a-jtextarea-or-jtextpane-horizontal-text-alignment
-StyledDocument doc = textPane.getStyledDocument();
-SimpleAttributeSet center = new SimpleAttributeSet();
-StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-doc.setParagraphAttributes(0, doc.getLength(), center, false);
-*/
    }
 
    public void update(ArrayList<Player> g)
@@ -64,8 +55,7 @@ doc.setParagraphAttributes(0, doc.getLength(), center, false);
          for (int i = 0; i < guests.size(); i++)
          {
             ImageIcon icon = guests.get(i).getIcon();
-           // g.drawImage(icon, (5 + (i * houseWidth)), height/2, null);
-            g.drawImage(icon.getImage(), (5 + (i * icon.getIconWidth())), height/2, null);
+            g.drawImage(icon.getImage(), 5, height/4 + (i * 20), null);
          }
       }
 

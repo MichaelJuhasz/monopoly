@@ -7,9 +7,17 @@ abstract class Tile
    public String name;
    public ArrayList<Player> guests = new ArrayList<Player>();
    
-   abstract void landedOn(Player p);
-
-   abstract public void leave(Player p);
+   public void landedOn(Player p)
+   {
+     guests.add(p);
+     updateGraphics();
+   }
+   
+   public void leave(Player p)
+   {
+      guests.remove(p);
+      updateGraphics();
+   }
 
    public int getNumber()
    {
@@ -17,4 +25,6 @@ abstract class Tile
    }
 
    abstract public JPanel getPanel();
+
+   abstract void updateGraphics();
 }

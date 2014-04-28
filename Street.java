@@ -24,9 +24,7 @@ class Street extends Property
       threeHs = three;
       fourHs = four;
       hotel = htl;
-      //price = p;
       bldgCost = bldgC;
-      //name = n;
       color = c;
       houses = 0;
       streetpanel = new StreetPanel(this);

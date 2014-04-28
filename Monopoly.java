@@ -39,7 +39,7 @@ class Monopoly
       tileList.add(new Jail());
       Street tile12 = new Street(12,10,50,150,450,625,750,140,100,"ST. CHARLES PLACE",pink);
       tileList.add(tile12);
-      Utility tile13 = new Utility(13,"ELECTRITC COMPANY");
+      Utility tile13 = new Utility(13,"ELECTRIC COMPANY");
       tileList.add(tile13);
       Street tile14 = new Street(14,10,50,150,450,625,750,140,100,"STATES AVENUE",pink);
       tileList.add(tile14);
@@ -130,10 +130,6 @@ class Monopoly
       tile38.setGroup(tile38, tile40);
       tile40.setGroup(tile38, tile40);
 
-      // Utilities 
-      tile13.setGroup(tile13, tile29);
-      tile29.setGroup(tile13, tile29);
-
       // Grab the various JPanels instantiated by the Tile instances and
       // group them into other JPanels
       JPanel south = new JPanel();
@@ -203,7 +199,7 @@ class Monopoly
       gameWindow.add(gameBoard, BorderLayout.CENTER);
       
       gameWindow.setVisible(true);
-      gameWindow.setSize(850,650);
+      gameWindow.setSize(880,650);
       gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
       // Set up a custom input dialog
@@ -290,15 +286,10 @@ class Monopoly
          players.add(pl);
       }
 
-      //ControlPanel controlPanel = new ControlPanel(players);
       ControlPanel controlPanel = ControlPanel.getInstance();
       controlPanel.setList(players);
 
       gameWindow.add(controlPanel, BorderLayout.EAST);
-
-      System.out.println(players.getSize());
-      System.out.println(players.getNodeAt(1));
-      System.out.println(players.getNext(players.getNodeAt(0)).getData());
 
       controlPanel.takeATurn((Player)players.getNodeAt(0).getData());
    }

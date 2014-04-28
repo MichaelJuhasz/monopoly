@@ -95,7 +95,6 @@ class Player
       } 
 
       currentTile.leave(this);
-      System.out.println("leaving "+currentTile.name);
 
       Tile destinationTile = Monopoly.tileList.get(space);
 
@@ -127,8 +126,6 @@ class Player
    {
       canRoll = true;
       doubles++;
-
-      System.out.println(doubles);
 
       if (inJail) 
       {

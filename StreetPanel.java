@@ -10,7 +10,6 @@ class StreetPanel extends JPanel
    private Street street;
    private int width, height, angle, houses;
    private ArrayList<Player> guests = new ArrayList<Player>();
-   //private ArrayList<BufferedImage> tokens = new ArrayList<BufferedImage>();
 
    public StreetPanel(Street s)
    {
@@ -22,14 +21,6 @@ class StreetPanel extends JPanel
       houses = 0;
       angle = ((s.getNumber()-1) / 10) * 90;
       setPreferredSize(new Dimension(50,100));
-      //setMaximumSize(new Dimension(50,100));
-     /*
-// Center the text (maybe) from: http://stackoverflow.com/questions/3213045/centering-text-in-a-jtextarea-or-jtextpane-horizontal-text-alignment
-StyledDocument doc = textPane.getStyledDocument();
-SimpleAttributeSet center = new SimpleAttributeSet();
-StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-doc.setParagraphAttributes(0, doc.getLength(), center, false);
-*/
    }
 
    public void update(ArrayList<Player> g, int h)
@@ -99,8 +90,7 @@ doc.setParagraphAttributes(0, doc.getLength(), center, false);
          for (int i = 0; i < guests.size(); i++)
          {
             ImageIcon icon = guests.get(i).getIcon();
-          // g.drawImage(icon, (5 + (i * houseWidth)), height/2, null);
-            g.drawImage(icon.getImage(), (5 + (i * icon.getIconWidth())), height/2, null);
+            g.drawImage(icon.getImage(), 5, height/3 + (i * 20), null);
          }
       }
 

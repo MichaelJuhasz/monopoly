@@ -12,8 +12,6 @@ class RailRoad extends Property
    public RailRoad(int num, String n)
    {
       super(num, 200, n);
-      //name = n;
-      //price = 200;
       railRoadPanel = new PropertyPanel(this);
    }
 

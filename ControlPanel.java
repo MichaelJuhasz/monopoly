@@ -27,6 +27,7 @@ class ControlPanel extends JPanel implements ActionListener
 
    public ControlPanel()
    {
+      setBackground(Color.WHITE);
       setLayout(new GridBagLayout());
       
       GridBagConstraints labelC = new GridBagConstraints();
@@ -35,6 +36,8 @@ class ControlPanel extends JPanel implements ActionListener
       labelC.gridy = 0;
       labelC.gridwidth = 2;
       labelC.ipady = 20;
+
+      label.setFont(new Font("TimesRoman", Font.BOLD, 20));
       add(label, labelC);
 
       GridBagConstraints fundsC = new GridBagConstraints();
@@ -80,7 +83,7 @@ class ControlPanel extends JPanel implements ActionListener
       diceC.gridx = 0;
       diceC.gridy = 5;
       diceC.gridwidth = 2;
-      diceC.ipady = 30;
+      diceC.ipady = 60;
       JPanel diceP = Dice.getInstance();
       add(diceP, diceC);
    }
