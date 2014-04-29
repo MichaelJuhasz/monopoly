@@ -3,10 +3,27 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
+
+/**
+ * Monopoly contains the main method and is generally responsible for 
+ * the setup of the game board.
+ *
+ * @author:  Michael Juhasz
+ * @version: Last modified 4/28/14
+ */
+
 class Monopoly
 {
    public static ArrayList<Tile> tileList = new ArrayList<Tile>();
 
+   /**
+    * setUpBoard (tediously) instantiates each Tile, loads them into
+    * an ArrayList, takes the Panels instantiated in the constructors
+    * of the Tiles and loads the Panels into four larger JPanels, which
+    * in turn are added to a larger JPanel, which is returned.
+    *
+    * @return: gameBoard a JPanel full of other JPanels, full of Panels 
+    */
    public static JPanel setUpBoard ()
    {
       Color purple = new Color(195,67,238);
@@ -18,7 +35,9 @@ class Monopoly
       Color green = new Color(6,125,8);
       Color darkBlue = new Color(6,48,125);
 
-      // Bottom of the board
+      /**
+       * Bottom of the board
+       */
       tileList.add(new Go());
       Street tile2 = new Street(2,2,10,30,90,160,250,60,50,"MEDDITERRANEAN AVENUE", purple);
       tileList.add(tile2);
@@ -35,7 +54,9 @@ class Monopoly
       Street tile10 = new Street(10,8,40,100,300,450,600,120,50,"CONNECTICUT AVENUE",lightBlue);
       tileList.add(tile10);
       
-      // Left side of the board
+      /**
+       * Left side of the board
+       */
       tileList.add(new Jail());
       Street tile12 = new Street(12,10,50,150,450,625,750,140,100,"ST. CHARLES PLACE",pink);
       tileList.add(tile12);
@@ -54,7 +75,9 @@ class Monopoly
       Street tile20 = new Street(20,16,80,220,600,800,1000,200,100,"NEW YORK AVENUE",orange);
       tileList.add(tile20);
 
-      // Top of the board
+      /**
+       * Top of the board
+       */
       tileList.add(new FreeParking());
       Street tile22 = new Street(22,18,90,250,700,875,1050,220,150,"KENTUCKY AVENUE",red);
       tileList.add(tile22);
@@ -73,7 +96,9 @@ class Monopoly
       Street tile30 = new Street(30,24,120,360,850,1025,1200,280,150,"MARVIN GARDENS",yellow);
       tileList.add(tile30);
 
-      // Right side of board
+      /**
+       * Right side of the board
+       */
       tileList.add(new GoToJail());
       Street tile32 = new Street(32,26,130,390,900,1100,1275,300,200,"PACIFIC AVENUE",green);
       tileList.add(tile32);
@@ -130,8 +155,10 @@ class Monopoly
       tile38.setGroup(tile38, tile40);
       tile40.setGroup(tile38, tile40);
 
-      // Grab the various JPanels instantiated by the Tile instances and
-      // group them into other JPanels
+      /**
+       * Grab the various JPanels instantiated by the Tile instances and
+       * group them into other JPanels
+       */
       JPanel south = new JPanel();
       south.setLayout(new BoxLayout(south, BoxLayout.LINE_AXIS));
       south.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
@@ -150,9 +177,11 @@ class Monopoly
       east.setLayout(new BoxLayout(east, BoxLayout.PAGE_AXIS));
       east.setPreferredSize(new Dimension(100,450));
 
-      // Because we'll be using BorderLayout from the gameboard panel,
-      // and because of how regions overlap in BorderLayout, the south
-      // and north panels must contain all the corners.
+      /**
+       * Because we'll be using BorderLayout from the gameboard panel,
+       * and because of how regions overlap in BorderLayout, the south
+       * and north panels must contain all the corners.
+       */
 
       // This should be "GO" through "JAIL"
       for (int i = 0; i < 11; i++)
@@ -290,6 +319,10 @@ class Monopoly
          players.add(pl);
       }
 
+      /**
+       * Instantiate the ControlPanel and pass it the list of Players,
+       * then start the game by calling takeATurn.
+       */
       ControlPanel controlPanel = ControlPanel.getInstance();
       controlPanel.setList(players);
 

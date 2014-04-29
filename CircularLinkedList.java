@@ -1,8 +1,7 @@
 /** 
-* Adapted from here: http://www.technicalypto.com/2010/01/linked-lists.html
+*  Very similar to the LinkedQueue referenced in class. 
+*
 **/
-
-
 class CircularLinkedList
 {
    private int size;

@@ -3,6 +3,14 @@ import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ *  Player objects serve as models/controllers for the states and behaviors 
+ *  most obvious associated with the entities playing Monopoly.
+ *  
+ * @author:  Michael Juhasz
+ * @version: Last modified 4/28/14
+ */
+
 class Player
 {
    private boolean myTurn, canRoll, canUpgrade, canPayFine, inJail;
@@ -14,14 +22,19 @@ class Player
    public Tile currentTile;
    private ImageIcon token;
    public boolean firstTurn = true;
-
-   // Each Player begins on GO (the zeroth position in the tileList)
-   // and begins with $1500.  The reason for the firstTurn boolean is
-   // that Go's landedOn must be called to draw the icons, however, 
-   // that method ordinarily calls the Player's payment method.  This 
-   // wouldn't be a problem except that payment references the ControlPanel
-   // which is instantiated after the Players.  Thus, firstTurn allows
-   // Go to draw the icons, but not call the Players' payment method.  
+   
+   /**
+    * Each Player begins on GO (the zeroth position in the tileList)
+    * and begins with $1500.  The reason for the firstTurn boolean is
+    * that Go's landedOn must be called to draw the icons, however, 
+    * that method ordinarily calls the Player's payment method.  This 
+    * wouldn't be a problem except that payment references the ControlPanel
+    * which is instantiated after the Players.  Thus, firstTurn allows
+    * Go to draw the icons, but not call the Players' payment method. 
+    *
+    * @param  n    a String used as the Player's name 
+    * @param  icon an ImageIcon to graphically identify the Player 
+    */
    public Player(String n, ImageIcon icon)
    {
       name = n;
@@ -31,10 +44,12 @@ class Player
       currentTile.landedOn(this);
       firstTurn = false;
    } 
-
-   // This method will control the graphics (populating the sidebar with 
-   // appropriate buttons, connected to the correct player), and the actions
-   // the player can take in his or her turn.
+ 
+   /**
+    * This method will control the graphics (populating the sidebar with 
+    * appropriate buttons, connected to the correct player), and the actions
+    * the player can take in his or her turn.
+    */
    public void beginTurn()
    {
       myTurn = true;
@@ -43,6 +58,14 @@ class Player
       if (!deeds.isEmpty()) canUpgrade = true;
    }
 
+   /** 
+    *  Activated by a button in the ControlPanel once canRoll is false,
+    *  endTurn asks the player if they're sure they want to end the turn,
+    *  then resets boolean, turn-related states to false, and doubles to 0.
+    *  
+    * @return   a boolean used by the ControlPanel to determine if the next
+    *           player's turn should start
+    */
    public boolean endTurn()
    {
       Object [] options = {"End Turn", "Not Yet"};
@@ -70,8 +93,12 @@ class Player
       else return false;
    }
    
-   // This should get called by a button in the sidebar, which 
-   // should be visible so long as canRoll is true.
+   /**
+    *  rollDice is also called from the ControlPanel, and in turn 
+    *  calls on a method in the Dice class.  If the Player is inJail,
+    *  the roll is used to determine whether he gets out.  Otherwise
+    *  the value of the roll is passed to move.
+    */
    public void rollDice()
    {
       if(canRoll && !inJail)
@@ -88,8 +115,14 @@ class Player
       }
    }
 
-   // Two move methods, one that takes a number, one that takes a 
-   // specific destination Tile.
+   /**
+    *  This move method is called by rollDice, which passes it
+    *  an argument that serves to increment the Player's virtual
+    *  position on the tileList, leaving the old Tile and landing
+    *  on the new one.
+    *
+    *  @param n  the result of the dice roll, used for the length of the move
+    */
    public void move(int n)
    {
 
@@ -109,6 +142,16 @@ class Player
       destinationTile.landedOn(this);
    }
 
+   /**
+    *  This move method is called not by a dice roll, but when the
+    *  Player is sent to a specific Tile.  The actions are otherwise
+    *  much the same as the above method, but a specific destination
+    *  is passed.
+    *
+    *  @param destination  the position on the tileList of the destination Tile
+    *  @param toJail       true if the Player is on his way to Jail and 
+    *                      not collecting $200 for passing Go
+    */
    private void move(int destination, boolean toJail)
    {
       Tile destinationTile = Monopoly.tileList.get(destination);
@@ -129,6 +172,11 @@ class Player
       currentTile = destinationTile;
    }
 
+   /**
+    *  Called by Dice.roll, doubleRoll increments double, reseting canRoll
+    *  and watching for three consecutive double rolls, which sends the 
+    *  Player to Jail (for speeding).
+    */
    public void doubleRoll()
    {
       canRoll = true;
@@ -144,6 +192,10 @@ class Player
       if (doubles == 3) goToJail();
    }
 
+   /**
+    *  A helper method that gets called by doubleRoll and the GoToJail Tile's
+    *  landedOn.  As of yet, the only method to call the secondary move.
+    */
    public void goToJail()
    {
       canRoll = false;
@@ -151,7 +203,11 @@ class Player
       move(10, true);
    }
 
-   // Called by button in control panel that is visible when canPayFine is true.
+   /**
+    *  Another method called from ControlPanel, if the Player is currently
+    *  inJail.  Offers to let the player pay $50 to get out of Jail.
+    *  Prevents Player from rolling or moving afterwards.
+    */
    public void getOutOfJail()
    {
       if (canPayFine)
@@ -181,22 +237,28 @@ class Player
       }
    }
 
-   // Another method called by a control panel button
+   /**
+    *  The last of the ControlPanel methods, upgrade creates a readable 
+    *  list of Streets in the Player's deeds ArrayList and allows the
+    *  player to select one to upgrade. If a valid selection, that 
+    *  Tile's upgradeStreet method is called.
+    */
    public void upgrade()
    {
       if(canUpgrade)
       {
-         Object [] names = new String[deeds.size()];
+         ArrayList<Objevt> deedNames = new ArrayList<Object>();
          for (int i = 0; i < deeds.size(); i++)
          {
             Property prop = deeds.get(i);
-            if (prop instanceof Street) names[i] = prop.name;
+            if (prop instanceof Street) deedNames.add(prop.name);
          }
+
+         String[] names = deedName.toArray(new String[deedName.size()]); 
 
          String s = (String)JOptionPane.showInputDialog(null, 
                                     "Which property do you want to upgrade?",
                                     "Property Upgrade",
-                                    //JOptionPane.DEFAULT_OPTION,
                                     JOptionPane.QUESTION_MESSAGE,
                                     null, 
                                     names,
@@ -211,7 +273,9 @@ class Player
       }
    }
 
-// Setter methods: 
+   /**
+    *  Increments of decrements funds; calls ControlPanel's updateFunds
+    */
    
    public void payment(int cost)
    {
@@ -219,61 +283,90 @@ class Player
       ControlPanel.getInstance().updateFunds();
    }
 
+   /**
+    *  Adds the value of purchased assets to Player's running total
+    */
    public void addAsset(int worth)
    {
       nonCashAssets += worth;
    }
 
+   /**
+    *  Adds a purchased Property to the Player's deeds list.
+    */
    public void addDeed(Property p)
    {
       deeds.add(p);
    }
 
-
-// Getter methods:
+   /**
+    *  @return funds  used by Properties and ControlPanel
+    */
 
    public int getFunds()
    {
       return funds;
    }
 
-   // However deeds are to be stored, this method will return that
-   // list in a data structure that should include a contains method.
+   /**
+    *  @return deeds  used by Properties
+    */
    public ArrayList<Property> getDeeds()
    {
       return deeds;
    }
 
+   /**
+    *  @return rollResult  used by Utilities to determine fee
+    */
    public int getRoll()
    {
       return rollResult;
    }
 
+   /**
+    *  @return    used by INCOME TAX to determine 10% of total worth
+    */
    public int getTotalWorth()
    {
       return funds + nonCashAssets;
    }
 
+   /**
+    *  @return token  used by Tiles (ultimately Panels) to draw tokens
+    */
    public ImageIcon getIcon()
    {
       return token;
    }
 
+   /**
+    *  @return canRoll  used by ControlPanel to enable dice roll button
+    */
    public boolean getCanRoll()
    {
       return canRoll;
    }
 
+   /**
+    *  @return canUpgrade  used by ControlPanel to enable upgrade button
+    */
    public boolean getCanUpgrade()
    {
       return canUpgrade;
    }
 
+   /**
+    *  @return canPayFine  used by ControlPanel to enable pay fine button
+    */
    public boolean getCanPayFine()
    {
       return canPayFine;
    }
 
+   /**
+    *  @return name  used by ControlPanel to print name
+    */
    public String getName()
    {
       return name;

@@ -2,6 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ *  ControlPanel serves as a view/controller for Player and 
+ *  also manages gameplay, enabling players to take actions 
+ *  and passing the turn from Player to Player. 
+ * @author:  Michael Juhasz
+ * @version: Last modified 4/28/14
+ */
+
 class ControlPanel extends JPanel implements ActionListener
 {
    private JLabel label = new JLabel();
@@ -13,9 +21,11 @@ class ControlPanel extends JPanel implements ActionListener
    private Player player;
    private CircularLinkedList players;
    private Node playerNode;
-
    private static ControlPanel instance = null;
    
+   /**
+    *  ControlPanel is a singleton.
+    */
    public synchronized static ControlPanel getInstance() 
    {
       if (instance == null) 
@@ -25,6 +35,10 @@ class ControlPanel extends JPanel implements ActionListener
       return instance;
    }
 
+   /**
+    *  Constructor sets up the various components within the JPanel,
+    *  including Dice.
+    */
    public ControlPanel()
    {
       setBackground(Color.WHITE);
@@ -88,20 +102,43 @@ class ControlPanel extends JPanel implements ActionListener
       add(diceP, diceC);
    }
 
+   /**
+    *  Called only once by main, setList sets the initial CircularLinkedList
+    *  of Players
+    *
+    *  @param ps  a CircularLinkedList of Players
+    */
    public void setList(CircularLinkedList ps)
    {
       players = ps;
       playerNode = players.getNodeAt(0);
    }
 
+   /**
+    *  Sets the Player referenced by the graphical components.  Called
+    *  first by main and thereafter only when a player ends his or her
+    *  turn.  Also checks to see if there's only one Player left in 
+    *  play and if so, informs him or her of this fact.
+    *
+    *  @param p   the Player referenced by the buttons and labels 
+    */
    public void takeATurn(Player p)
    {
       player = p;
       label.setText(p.getName());
       updateFunds();
       player.beginTurn();
+
+      if (players.getSize() == 1) 
+      {
+         JOptionPane.showMessageDialog(null, player.getName()+ "has won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+      }
    }
 
+   /**
+    *  Sets the text of funds label.  Also checks to see if a Player's 
+    *  funds have dropped below 0.  If so, drops that Player from the game. 
+    */
    public void updateFunds()
    {
       funds.setText("Funds: "+player.getFunds());
@@ -113,14 +150,16 @@ class ControlPanel extends JPanel implements ActionListener
          takeATurn((Player)playerNode.getData());
          players.remove(playerNode);
       }
-      if (players.getSize() == 1) 
-      {
-         Player victor = (Player)players.getNodeAt(0).getData();
-         String name = victor.getName();
-         JOptionPane.showMessageDialog(null, name+ "has won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
-      }
    }
 
+   /**
+    *  Action listeners.  Listens for the buttons and calls corresponding
+    *  Player methods.  End only works if the player can't roll and if 
+    *  the player okays the end of turn.  Thereupon it gets the next
+    *  Player in the players list and feeds it into takeATurn.
+    *
+    * @param e  the action event being listened for.
+    */
    public void actionPerformed(ActionEvent e)
    {
       JButton b = (JButton)e.getSource();

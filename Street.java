@@ -5,8 +5,6 @@ import java.util.ArrayList;
 class Street extends Property
 {
    private int number, rent, oneHs, twoHs, threeHs, fourHs, hotel, price, bldgCost, houses;
-  // public Player owner;
- // public String name;
    public Color color;
    private ArrayList<Street> group = new ArrayList<Street>();
    private boolean monopoly = false;
