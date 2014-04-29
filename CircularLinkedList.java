@@ -44,9 +44,25 @@ class CircularLinkedList
 
    public void removeAt(int position)
    {
-      Node tempNode = getNodeAt(position - 1);
-      tempNode.setLink(tempNode.getLink().getLink());
+	  Node tempNode;
+	  if (position == 0) 
+	  {
+	     tempNode = getNodeAt(size - 1);
+	  }
+	  else
+	  {
+         tempNode = getNodeAt(position - 1);
+	  }
+	  if (size == 2) 
+	  {
+		  tempNode.setLink(tempNode);
+	  }
+	  else 
+	  {
+         tempNode.setLink(tempNode.getLink().getLink());
+	  }
       size--;
+      if (size <= 0) head = null;
    }
 
    public void remove(Node n)

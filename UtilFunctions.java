@@ -4,6 +4,14 @@ import java.util.ArrayList;
 
 class UtilFunctions
 {
+	public static void drawTitle(Graphics2D g, String title)
+	{
+		String [] parts = title.split("\\s");
+		for (String part: parts)
+		{
+			
+		}
+	}
 	public static void drawTile(Graphics2D g, int width, int height, int angle)
 	{
       if (angle == 90) g.translate(height, 0);

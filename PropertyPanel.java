@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -46,8 +47,14 @@ class PropertyPanel extends JPanel
       g.drawRect(0, 0, width, height);
 
       // Write name of tile
-      g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 10));
-      g.drawString(name, 0, 20);
+      g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 8));
+	  String [] parts = name.split("\\s");
+	  for (int i = 0; i < parts.length; i++)
+	  {
+		 int pY = 20 + i * g.getFontMetrics().getHeight() + g.getFontMetrics().getLeading();
+		 g.drawString(parts[i], 5, pY);
+      }
+
 
       // Draw any player tokens that are sitting on this tile
       if (!guests.isEmpty())

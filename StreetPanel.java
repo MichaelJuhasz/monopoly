@@ -41,7 +41,7 @@ class StreetPanel extends JPanel
       else if (angle == 180) g.translate(width, height);
       else if (angle == 270) g.translate(0, width);
 
-      // Rotate tile accorinding to position on the board (i.e. its number)
+      // Rotate tile according to position on the board (i.e. its number)
       g.rotate(Math.toRadians(angle));
 
       // Draw white box
@@ -60,8 +60,13 @@ class StreetPanel extends JPanel
       g.drawLine(0, height/4, width, height/4);
 
       // Write name of tile
-      g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 10));
-      g.drawString(name, 0, height/4+20);
+      g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 8));
+	  String [] parts = name.split("\\s");
+	  for (int i = 0; i < parts.length; i++)
+	  {
+		 int pY = height/4 + 20 + i * g.getFontMetrics().getHeight() + g.getFontMetrics().getLeading();
+		 g.drawString(parts[i], 5, pY);
+      }
 
       // Draw houses or hotel
       g.setStroke(new BasicStroke(1));

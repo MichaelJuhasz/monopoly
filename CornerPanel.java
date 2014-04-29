@@ -59,7 +59,12 @@ class CornerPanel extends JPanel
       // Write name of tile
       g.rotate(Math.toRadians(-45));
       g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
-      g.drawString(name, -15, height/4+20);
+	  String [] parts = name.split("\\s");
+	  for (int i = 0; i < parts.length; i++)
+	  {
+		 int pY = height/4+20 + i * g.getFontMetrics().getHeight() + g.getFontMetrics().getLeading();
+		 g.drawString(parts[i], -15, pY);
+      }
 
       // g.rotate(-(Math.toRadians(angle)));
    }

@@ -247,14 +247,14 @@ class Player
    {
       if(canUpgrade)
       {
-         ArrayList<Objevt> deedNames = new ArrayList<Object>();
+         ArrayList<Object> deedNames = new ArrayList<Object>();
          for (int i = 0; i < deeds.size(); i++)
          {
             Property prop = deeds.get(i);
             if (prop instanceof Street) deedNames.add(prop.name);
          }
 
-         String[] names = deedName.toArray(new String[deedName.size()]); 
+         String[] names = deedNames.toArray(new String[deedNames.size()]); 
 
          String s = (String)JOptionPane.showInputDialog(null, 
                                     "Which property do you want to upgrade?",

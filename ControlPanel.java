@@ -131,7 +131,11 @@ class ControlPanel extends JPanel implements ActionListener
 
       if (players.getSize() == 1) 
       {
-         JOptionPane.showMessageDialog(null, player.getName()+ "has won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+         JOptionPane.showMessageDialog(null, player.getName()+ " has won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+         roll.removeActionListener(this);
+         upgrade.removeActionListener(this);
+         end.removeActionListener(this);
+         fine.removeActionListener(this);
       }
    }
 
@@ -146,9 +150,9 @@ class ControlPanel extends JPanel implements ActionListener
       {
          JOptionPane.showMessageDialog(null, player.getName()+" is out of the game.","Game Over", JOptionPane.ERROR_MESSAGE);
          player.endTurn();
+         players.remove(playerNode);
          playerNode = players.getNext(playerNode);
          takeATurn((Player)playerNode.getData());
-         players.remove(playerNode);
       }
    }
 
